@@ -203,4 +203,13 @@ public class Student {
         Calendar currentYear = Calendar.getInstance();
         return currentYear.get(Calendar.YEAR) - year;
     }
+
+    public int calculateAge() {
+        int totalDays = 0;
+        while (this.BirthDate.before(Calendar.getInstance())) {
+            this.BirthDate.add(Calendar.DATE, 1);
+            totalDays = totalDays + 1;
+        }
+        return Math.round(totalDays / 365);
+    }
 }

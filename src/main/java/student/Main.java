@@ -17,7 +17,7 @@ public class Main {
 //        System.out.println(ft.format(std.getBirthDate().getTime()));
         std.showInfo();
 
-
+        System.out.println("The number of years that the beautiful student mentioned above is :" + std.calculateAge() );
     }
 
 }
