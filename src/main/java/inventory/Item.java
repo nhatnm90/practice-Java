@@ -1,4 +1,6 @@
 package inventory;
+import javax.management.ObjectName;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.UUID;
@@ -10,6 +12,7 @@ public class Item {
     private Calendar ExpiredDate;
     private int OnHand;
     private boolean IsRecipe;
+    private Object ObjectName;
 
     public void setName(String name) {
         this.Name = name;
@@ -17,6 +20,80 @@ public class Item {
 
     public String getName() {
         return this.Name;
+    }
+
+    public Item(String name, int onHand) {
+        this.Name = name;
+        this.OnHand = onHand;
+    }
+
+    public Item(){
+        setName("No Name");
+        CreatedDate = Calendar.getInstance();
+        Calendar createdDate = Calendar.getInstance();
+        createdDate.add(Calendar.MONTH, 2);
+        ExpiredDate = createdDate;
+
+    }
+
+    public Item(String name, int onHand, int createdDay, int createdMonth, int createdYear,int expiredDay, int expiredMonth, int expiredYear) {
+        Name = name;
+        OnHand = onHand;
+        CreatedDate = setFormatDate(createdDay, createdMonth, createdYear);
+        ExpiredDate = setFormatDate(expiredDay, expiredMonth, expiredYear);
+
+    }
+
+    public String formatDate(Calendar date, String pattern) {
+        SimpleDateFormat dateFormat = new SimpleDateFormat(pattern);
+        Date currentDate = date.getTime();
+        return dateFormat.format(currentDate);
+    }
+
+    public Calendar setFormatDate(int day, int month, int year) {
+        Calendar formatDate = Calendar.getInstance();
+        formatDate.set(year, month - 1, day );
+        return formatDate;
+    }
+
+    private Boolean isExpired(Calendar expiredDate){
+        Calendar currentDate = Calendar.getInstance();
+        if (expiredDate.before(currentDate)){
+            return true;
+        }
+        return false;
+    }
+
+//    private void isExpired(Calendar expiredDate){
+//        if (expiredDate.before(Calendar.getInstance())) {
+//            System.out.println("Sản phẩm còn hạn sử dụng");
+//        }
+//        System.out.println("Sản phẩm hết hạn sử dụng");
+//    }
+
+    /*
+     * Show Item Info
+     * */
+    public void showItemInfo() {
+        System.out.println("Item Name: " + Name);
+        System.out.println("Item On Hand: " + OnHand);
+        System.out.println("Created Date: " + formatDate(CreatedDate, "dd-MMM-YYYY"));
+        System.out.println("Expired Date: " + formatDate(ExpiredDate, "dd-MMM-YYYY"));
+
+    }    /*
+     * Show Item Info Vietnamese
+     * */
+    public void thongTinSanPham() {
+        System.out.println("Tên: " + Name);
+        System.out.println("Số lượng nhập: " + OnHand);
+        System.out.println("Ngày sản xuất: " + formatDate(CreatedDate, "dd-MM-YYYY"));
+        System.out.println("Ngày hết hạn: " + formatDate(ExpiredDate, "dd-MM-YYYY"));
+        if(isExpired(ExpiredDate)){
+            System.out.println("Sản phẩm hết hạn sử dụng");
+        } else {
+            System.out.println("Sản phẩm còn hạn sử dụng");
+        }
+
     }
 
     /*
