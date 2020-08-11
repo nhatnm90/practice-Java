@@ -2,6 +2,7 @@ package student;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.UUID;
 
 public class Student {
@@ -65,10 +66,10 @@ public class Student {
 
     }
     public double randomScore() {
-        int max = 10;
-        int min = 0;
-        int range = max - min;
-        double randomNumber = (Math.random() * range);
+//        int max = 10;
+//        int min = 0;
+//        int range = max - min;
+        double randomNumber = (Math.random() * 10); // range luôn = 10
         return round(randomNumber);
     }
 
@@ -104,7 +105,10 @@ public class Student {
      * */
     public String formatDate(Calendar date, String pattern) {
         SimpleDateFormat dateFormat = new SimpleDateFormat(pattern);
-        return dateFormat.format(date.getTime());
+
+        Date currentDate = date.getTime();
+
+        return dateFormat.format(currentDate);
     }
 
 
@@ -206,7 +210,8 @@ public class Student {
 
     public int calculateAge() {
         int totalDays = 0;
-        while (this.BirthDate.before(Calendar.getInstance())) {
+        Calendar currentDate = Calendar.getInstance();
+        while (this.BirthDate.before(currentDate)) {
             this.BirthDate.add(Calendar.DATE, 1);
             totalDays = totalDays + 1;
         }
