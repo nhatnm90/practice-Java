@@ -79,8 +79,8 @@ public class Item {
         System.out.println("Item On Hand: " + OnHand);
         System.out.println("Created Date: " + formatDate(CreatedDate, "dd-MMM-YYYY"));
         System.out.println("Expired Date: " + formatDate(ExpiredDate, "dd-MMM-YYYY"));
-
-    }    /*
+    }
+    /*
      * Show Item Info Vietnamese
      * */
     public void thongTinSanPham() {
