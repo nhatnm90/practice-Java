@@ -10,7 +10,7 @@ public class Account {
     private Calendar CreatedDate;
     private float rate;
     private long currentBalance;
-    private List<String> history;
+    private List<AccountHistory> history;
     private Period period;
 
     public enum  Period {

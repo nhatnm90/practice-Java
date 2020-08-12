@@ -20,8 +20,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="931e8be6-453d-4ef9-96c5-b3e75cbc0ef4" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/bank/Account.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/bank/Account.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/bank/AccountTemp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/bank/AccountHistory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/bank/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/bank/Main.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -86,7 +87,14 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="Main (2)" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Main" />
+      <module name="practice" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="bank.Main" />
       <module name="practice" />
       <extension name="coverage">
@@ -95,13 +103,6 @@
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="Main" />
-      <module name="practice" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -171,10 +172,11 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="414" y="175" key="#com.intellij.execution.impl.EditConfigurationsDialog/-1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1597223744464" />
-    <state x="765" y="236" key="#com.intellij.ide.util.MemberChooser" timestamp="1597217846608">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state x="574" y="204" key="#com.intellij.ide.util.MemberChooser" timestamp="1597242859300">
+      <screen x="0" y="0" width="1440" height="900" />
     </state>
     <state x="765" y="236" key="#com.intellij.ide.util.MemberChooser/-1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1597217846608" />
+    <state x="574" y="204" key="#com.intellij.ide.util.MemberChooser/0.0.1440.900@0.0.1440.900" timestamp="1597242859300" />
     <state x="743" y="389" width="433" height="268" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.classes" timestamp="1597223690504">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -242,8 +244,8 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/src/main/java/bank/Main.java</url>
-          <line>8</line>
-          <properties class="bank.Main">
+          <line>7</line>
+          <properties class="bank.Main" method="main">
             <option name="EMULATED" value="true" />
           </properties>
           <option name="timeStamp" value="24" />

@@ -2,8 +2,7 @@ package bank;
 
 import java.util.Calendar;
 
-import static bank.AccountTemp.Period.Month;
-import static bank.AccountTemp.Period.Week;
+import static bank.AccountHistory.Period.Month;
 
 public class Main {
     public static void main(String[] args){
@@ -12,7 +11,7 @@ public class Main {
         Calendar endDate = Calendar.getInstance();
         endDate.add(Calendar.DATE, 67);
 
-        AccountTemp acc = new AccountTemp(246, "Hanh", "Nguyen", startDate, endDate, 50000, Month);
+        AccountHistory acc = new AccountHistory(246, "Hanh", "Nguyen", startDate, endDate, 50000, Month);
 
         System.out.println(acc.generateNumberOfExpiredDate());
 
