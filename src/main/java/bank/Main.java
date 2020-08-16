@@ -7,17 +7,71 @@ public class Main {
     private static Object Month;
 
     public static void main(String[] args){
-        Calendar startDate = Calendar.getInstance();
-        Calendar endDate = Calendar.getInstance();
-        endDate.add(Calendar.DATE, 49);
 
-        Account acc12 = new Account(246, "Hanh", "Nguyen", startDate, endDate, 50000, Account.Period.Month);
-        acc12.calculateCurrentBalance();
+        Account customer1 = new Account(246, "Hanh", "Nguyen", Account.Period.Month);
+        Account customer2 = new Account(211, "Nhat", "Nguyen", Account.Period.Year);
+        Account customer3 = new Account(111, "Trang", "Nguyen", Account.Period.Week);
 
-        acc12.addMoney(10000);
-        acc12.addMoney(20000);
-        acc12.subMoney(5000);
-        acc12.showInfo();
+        customer2.addMoney(100000);
+
+        // Cho ngủ 15s để thấy đc thời điểm giao dịch khác nhau
+        try {
+            Thread.sleep(15 * 1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        customer2.addMoney(148000);
+
+        // Cho ngủ 15s để thấy đc thời điểm giao dịch khác nhau
+        try {
+            Thread.sleep(15 * 1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        customer2.subMoney(5000);
+
+        customer2.showInfo();
+
+        customer1.showInfo();
+
+        /*
+         *
+         * 1. Viết hoặc tùy chỉnh lại phương thức showInfo để in ra thông tin khách hàng sau khi thực hiện những giao dịch trên theo những yêu cầu sau
+         * - In tất cả thông tin khách hàng
+         * - In lịch sử giao dịch theo format sau:
+         *   + nếu chưa có bất kì giao dịch nào: -> "Khách hàng chưa có giao dịch"
+         *   + nếu đã có giao dịch:
+         *       - sắp xếp lịch sử giao dịch theo ngày tháng theo thứ tự mới trước cũ sau
+         *       - format theo cấu trúc sau:
+         * 			- Số tài khoản: 211
+         *			- Tên + Họ: Nhat Nguyen
+         *			- Số tiền trong tài khoản: 293000
+         *			- Ngày tạo tài khoản: 16-08-2020
+         *			- Lịch sử giao dịch:
+         *			-------------------------------
+         *			+ Ngày giao dịch: 16-08-2020 05:11:33
+         *			+ Số tiền: 5000
+         *			+ Loại giao dịch: Rút tiền
+         *			-------------------------------
+         *			+ Ngày giao dịch: 16-08-2020 05:11:18
+         *			+ Số tiền: 148000
+         *			+ Loại giao dịch: Nạp tiền
+         *			-------------------------------
+         *			+ Ngày giao dịch: 16-08-2020 05:11:03
+         *			+ Số tiền: 100000
+         *			+ Loại giao dịch: Nạp tiền
+         *
+         * 2. Viết phương thức chuyển tiền giữa 2 khách hàng theo những yêu cầu sau
+         *  - nhận vào id của người chuyển, người nhận và số tiền chuyển
+         *  - kiểm tra thông tin nhận gửi, số dư khả dụng, tài khoản ngân hàng tồn tại hay ko
+         *  - ghi lại lịch sử giao dịch cho cả 2 đối tượng
+         *  vd: void transfer (long sourceAccountId, long destinationAccountId, long balance)
+         *  customer1 chuyển tiền cho customer2 (tùy chọn cách gọi phương thức chuyển tiền ...)
+         *
+         * 3. Viết hoặc tùy chỉnh lại phương thức showInfo để in ra thông tin khách hàng sau khi thực hiện những giao dịch chuyển tiền giữa 2 khách hàng trên
+         * */
 
     }
 

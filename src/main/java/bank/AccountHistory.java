@@ -1,4 +1,5 @@
 package bank;
+
 import java.util.Calendar;
 import java.util.UUID;
 
@@ -10,7 +11,9 @@ public class AccountHistory {
 
     public enum Type {
         in,
-        out
+        out,
+        transferIn,
+        transferOut
     }
 
     public AccountHistory(long balance, Type type) {

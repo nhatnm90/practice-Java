@@ -39,6 +39,16 @@ public class Account {
         this.currentBalance = INITIALIZED_BALANCE;
     }
 
+    public Account(long accountId, String firstName, String lastName, Period period) {
+        this.accountId = accountId;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.createdDate = Calendar.getInstance();
+        this.currentBalance = INITIALIZED_BALANCE;
+        this.period = period;
+        this.histories = new ArrayList<>();
+    }
+
     public Account(long accountId, String firstName, String lastName, Calendar createdDate, Calendar endDate,
                    long currentBalance, Period period) {
         this.accountId = accountId;
