@@ -1,9 +1,8 @@
 package bank;
+import utils.StringFormat;
+
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 public class Account {
 
@@ -143,7 +142,11 @@ public class Account {
         System.out.println("- Tên + Họ: " + firstName + " " + lastName);
         System.out.println("- Số tiền trong tài khoản: " + currentBalance);
         System.out.println("- Ngày tạo tài khoản: " + formatDate(createdDate, "dd-MM-YYYY"));
-        System.out.println("- History: " + histories);
+        System.out.println("- Lịch sử giao dịch: ");
+        Collections.sort(histories);
+        for (AccountHistory accountHistory : histories) {
+            System.out.println(StringFormat.formatDate(accountHistory.getCreatedDate(), "dd-MM-yyyy hh:mm:ss"));
+        }
     }
 
     /*

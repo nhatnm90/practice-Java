@@ -14,18 +14,18 @@ public class Main {
 
         customer2.addMoney(100000);
 
-        // Cho ngủ 15s để thấy đc thời điểm giao dịch khác nhau
+        // Cho ngủ 3s để thấy đc thời điểm giao dịch khác nhau
         try {
-            Thread.sleep(15 * 1000);
+            Thread.sleep(3 * 1000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
 
         customer2.addMoney(148000);
 
-        // Cho ngủ 15s để thấy đc thời điểm giao dịch khác nhau
+        // Cho ngủ 3s để thấy đc thời điểm giao dịch khác nhau
         try {
-            Thread.sleep(15 * 1000);
+            Thread.sleep(3 * 1000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -67,6 +67,8 @@ public class Main {
          *  - nhận vào id của người chuyển, người nhận và số tiền chuyển
          *  - kiểm tra thông tin nhận gửi, số dư khả dụng, tài khoản ngân hàng tồn tại hay ko
          *  - ghi lại lịch sử giao dịch cho cả 2 đối tượng
+         *      + nhận tiền: Type = transferIn
+         *      + chuyển tiền: Type = transferOut
          *  vd: void transfer (long sourceAccountId, long destinationAccountId, long balance)
          *  customer1 chuyển tiền cho customer2 (tùy chọn cách gọi phương thức chuyển tiền ...)
          *
