@@ -6,6 +6,19 @@ import java.util.Date;
 import java.util.List;
 
 public class Account {
+
+    //<editor-fold desc="Constant">
+    private static final long INITIALIZED_BALANCE = 50000;
+
+    public enum Period {
+        Week,
+        Month,
+        Quarter,
+        Year
+    }
+    //</editor-fold>
+
+    //<editor-fold desc="Propeties">
     private long accountId;
     private String firstName;
     private String lastName;
@@ -15,38 +28,15 @@ public class Account {
     private Calendar endDate;
     private List<AccountHistory> histories;
     private Period period;
+    //</editor-fold>
 
-    public enum Period {
-        Week,
-        Month,
-        Quarter,
-        Year
-    }
-
+    //<editor-fold desc="Constructor">
     public Account(long accountId, String firstName, String lastName) {
         this.accountId = accountId;
         this.firstName = firstName;
         this.lastName = lastName;
         this.createdDate = Calendar.getInstance();
-        this.currentBalance = 50000;
-    }
-
-    public Account(Period period) {
-        switch (period) {
-            case Week:
-                rate = 3;
-                break;
-            case Month:
-                rate = 5;
-                break;
-            case Quarter:
-                rate = 10;
-                break;
-            case Year:
-                rate = 16;
-                break;
-        }
-        this.currentBalance = 50000;
+        this.currentBalance = INITIALIZED_BALANCE;
     }
 
     public Account(long accountId, String firstName, String lastName, Calendar createdDate, Calendar endDate,
@@ -60,9 +50,10 @@ public class Account {
         this.period = period;
         this.rate = generateRate();
         this.histories = new ArrayList<>();
-
     }
+    //</editor-fold>
 
+    //<editor-fold desc="Private functions">
     private float generateRate(){
         switch (this.period) {
             case Week:
@@ -75,66 +66,6 @@ public class Account {
                 return 16;
         }
         return 0;
-    }
-
-    public String formatDate(Calendar date, String pattern) {
-        SimpleDateFormat dateFormat = new SimpleDateFormat(pattern);
-        Date currentDate = date.getTime();
-        return dateFormat.format(currentDate);
-    }
-
-    /*
-     * Show Info
-     * */
-    public void showInfo() {
-        System.out.println("- Số tài khoản: " + accountId);
-        System.out.println("- Tên + Họ: " + firstName + " " + lastName);
-        System.out.println("- Số tiền trong tài khoản: " + currentBalance);
-        System.out.println("- Ngày tạo tài khoản: " + formatDate(createdDate, "dd-MM-YYYY"));
-        System.out.println("- History: " + histories);
-
-    }
-
-    /*
-     * Recalculate current balance when adding more money
-     * Add histories to Account History list
-     *  @param value of money
-     * */
-    public void addMoney(long value) {
-        currentBalance = currentBalance + value;
-        AccountHistory history = new AccountHistory(value, AccountHistory.Type.in);
-        this.histories.add(history);
-
-    }
-    /*
-     * Recalculate current balance when subtracting money
-     * Add histories to Account History list
-     * @param value of money
-     * */
-    public void subMoney(long value) {
-        if ((currentBalance - 50000) >= value) {
-            currentBalance = currentBalance - value;
-        } else {
-            System.out.println("Số tiền trong tài khoản không đủ");
-        }
-        AccountHistory history = new AccountHistory(value, AccountHistory.Type.out);
-        this.histories.add(history);
-    }
-
-    /*
-     * Recalculate current balance with rate
-     * */
-    public void recalculatedBalance() {
-        currentBalance = currentBalance + (currentBalance * (long) rate) / 100;
-
-    }
-
-    public float getRate() {
-        return rate;
-    }
-
-    public long getCurrentBalance() {
-        return currentBalance;
     }
 
     /*
@@ -169,7 +100,7 @@ public class Account {
      * - endDate:    15-01-2020
      * -> Đã qua đc 2 chu kì (2 tuần) -> result = 2
      * */
-    public int generateNumberOfExpiredDate() {
+    private int generateNumberOfExpiredDate() {
         // Lấy ngày hiện tại cộng với số ngày cần thêm vào theo Period
         // Nếu đã sau ngày kết thúc -> return 0 do chưa thỏa đc bất kì kì hạn nào
         Calendar startDate = Calendar.getInstance();
@@ -186,39 +117,70 @@ public class Account {
         return result;
     }
 
+    private String formatDate(Calendar date, String pattern) {
+        SimpleDateFormat dateFormat = new SimpleDateFormat(pattern);
+        Date currentDate = date.getTime();
+        return dateFormat.format(currentDate);
+    }
+    //</editor-fold>
+
+    //<editor-fold desc="Public functions">
+    /*
+     * Show Info
+     * */
+    public void showInfo() {
+        System.out.println("- Số tài khoản: " + accountId);
+        System.out.println("- Tên + Họ: " + firstName + " " + lastName);
+        System.out.println("- Số tiền trong tài khoản: " + currentBalance);
+        System.out.println("- Ngày tạo tài khoản: " + formatDate(createdDate, "dd-MM-YYYY"));
+        System.out.println("- History: " + histories);
+    }
+
+    /*
+     * Recalculate current balance when adding more money
+     * Add histories to Account History list
+     *  @param value of money
+     * */
+    public void addMoney(long value) {
+        currentBalance = currentBalance + value;
+        AccountHistory history = new AccountHistory(value, AccountHistory.Type.in);
+        this.histories.add(history);
+
+    }
+    /*
+     * Recalculate current balance when subtracting money
+     * Add histories to Account History list
+     * @param value of money
+     * */
+    public void subMoney(long value) {
+        if ((currentBalance - 50000) >= value) {
+            currentBalance = currentBalance - value;
+        } else {
+            System.out.println("Số tiền trong tài khoản không đủ");
+        }
+        AccountHistory history = new AccountHistory(value, AccountHistory.Type.out);
+        this.histories.add(history);
+    }
+
+    /*
+     * Recalculate current balance with rate
+     * */
+    public void recalculatedBalance() {
+        currentBalance = currentBalance + (currentBalance * (long) rate) / 100;
+    }
+
     /*
      * Hàm tính tổng tiền lãnh
      * Dựa vào số chu kì đã đc tính bên trên, loop qua danh sách chu kì và cộng đồn tiền theo công thức
      * */
     public void calculateCurrentBalance() {
-        // Todo: code here
         int noOfRate = this.generateNumberOfExpiredDate();
 
         for (int i = 1; i <= noOfRate; i++) {
             this.recalculatedBalance();
         }
     }
-
-
-    public void calculatedEndBalance() {
-        int totalDays = 0;
-        Calendar currentDate = Calendar.getInstance();
-        while (this.endDate.after(currentDate)) {
-            this.endDate.add(Calendar.DATE, 1);
-            totalDays = totalDays + 1;
-        }
-        long totalPeriods = 0;
-        if (this.period == Period.Week) {
-            totalPeriods = Math.round(totalDays / 7);
-        } else if (this.period == Period.Month) {
-            totalPeriods = Math.round(totalDays / 30);
-        } else if (this.period == Period.Quarter) {
-            totalPeriods = Math.round(totalDays / 90);
-        } else {
-            totalPeriods = Math.round(totalDays / 365);
-        }
-        currentBalance = currentBalance + (currentBalance * (long) rate * totalPeriods);
-    }
+    //</editor-fold>
 }
     /*
         public int calculateAge() {

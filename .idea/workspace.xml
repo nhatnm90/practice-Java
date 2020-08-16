@@ -1,8 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="AutoImportSettings">
-    <option name="autoReloadType" value="SELECTIVE" />
-  </component>
   <component name="BranchesTreeState">
     <expand>
       <path>
@@ -23,19 +20,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="931e8be6-453d-4ef9-96c5-b3e75cbc0ef4" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/bank/Account.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/bank/Account.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/bank/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/bank/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/inventory/Item.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/inventory/Item.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/inventory/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/inventory/Main.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/inventory/Product$Gender.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/inventory/Product$Grade.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/inventory/Product.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/student/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/student/Main.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/student/Student$Gender.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/student/Student$Gender.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/student/Student$Grade.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/student/Student$Grade.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/student/Student.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/student/Student.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -158,7 +145,7 @@
       </list>
     </recent_temporary>
   </component>
-  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="SpellCheckerSettings" BundledDictionaries="0" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" Dictionaries="0" CorrectionsLimit="5" DefaultDictionary="application-level" UseSingleDictionary="true" />
   <component name="SvnConfiguration">
     <configuration />
   </component>
