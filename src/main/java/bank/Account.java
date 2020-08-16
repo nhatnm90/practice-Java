@@ -196,15 +196,6 @@ public class Account {
     //</editor-fold>
 }
     /*
-        public int calculateAge() {
-        int totalDays = 0;
-        Calendar currentDate = Calendar.getInstance();
-        while (this.BirthDate.before(currentDate)) {
-            this.BirthDate.add(Calendar.DATE, 1);
-            totalDays = totalDays + 1;
-        }
-        return Math.round(totalDays / 365);
-    }
      * 1. Tạo constructor để tạo đối tượng
      * - số tài khoản
      * - tên + họ

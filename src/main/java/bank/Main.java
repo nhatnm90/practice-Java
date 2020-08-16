@@ -10,7 +10,7 @@ public class Main {
 
         Account customer1 = new Account(246, "Hanh", "Nguyen", Account.Period.Month);
         Account customer2 = new Account(211, "Nhat", "Nguyen", Account.Period.Year);
-        Account customer3 = new Account(111, "Trang", "Nguyen", Account.Period.Week);
+        Account customer3 = new Account(111, "Trang PM", "Nguyen", Account.Period.Week);
 
         customer2.addMoney(100000);
 
