@@ -1,5 +1,6 @@
 package bank;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -12,7 +13,7 @@ public class Account {
     private float rate;
     private long currentBalance;
     private Calendar endDate;
-    private List<String> history;
+    private List<AccountHistory> histories;
     private Period period;
 
     public enum Period {
@@ -48,7 +49,8 @@ public class Account {
         this.currentBalance = 50000;
     }
 
-    public Account(long accountId, String firstName, String lastName, Calendar createdDate, Calendar endDate, long currentBalance, Period period) {
+    public Account(long accountId, String firstName, String lastName, Calendar createdDate, Calendar endDate,
+                   long currentBalance, Period period) {
         this.accountId = accountId;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -56,20 +58,23 @@ public class Account {
         this.endDate = endDate;
         this.currentBalance = currentBalance;
         this.period = period;
-        switch (period) {
+        this.rate = generateRate();
+        this.histories = new ArrayList<>();
+
+    }
+
+    private float generateRate(){
+        switch (this.period) {
             case Week:
-                rate = 3;
-                break;
+                return 3;
             case Month:
-                rate = 5;
-                break;
+                return 5;
             case Quarter:
-                rate = 10;
-                break;
+                return 10;
             case Year:
-                rate = 16;
-                break;
+                return 16;
         }
+        return 0;
     }
 
     public String formatDate(Calendar date, String pattern) {
@@ -86,17 +91,24 @@ public class Account {
         System.out.println("- Tên + Họ: " + firstName + " " + lastName);
         System.out.println("- Số tiền trong tài khoản: " + currentBalance);
         System.out.println("- Ngày tạo tài khoản: " + formatDate(createdDate, "dd-MM-YYYY"));
+        System.out.println("- History: " + histories);
+
     }
 
     /*
      * Recalculate current balance when adding more money
-     * @param value of money
+     * Add histories to Account History list
+     *  @param value of money
      * */
     public void addMoney(long value) {
         currentBalance = currentBalance + value;
+        AccountHistory history = new AccountHistory(value, AccountHistory.Type.in);
+        this.histories.add(history);
+
     }
     /*
      * Recalculate current balance when subtracting money
+     * Add histories to Account History list
      * @param value of money
      * */
     public void subMoney(long value) {
@@ -105,6 +117,8 @@ public class Account {
         } else {
             System.out.println("Số tiền trong tài khoản không đủ");
         }
+        AccountHistory history = new AccountHistory(value, AccountHistory.Type.out);
+        this.histories.add(history);
     }
 
     /*
@@ -158,16 +172,17 @@ public class Account {
     public int generateNumberOfExpiredDate() {
         // Lấy ngày hiện tại cộng với số ngày cần thêm vào theo Period
         // Nếu đã sau ngày kết thúc -> return 0 do chưa thỏa đc bất kì kì hạn nào
-        this.createdDate.add(Calendar.DATE, generateNumberOfAddedDays());
-        if (this.createdDate.after(this.endDate)) {
+        Calendar startDate = Calendar.getInstance();
+        startDate.add(Calendar.DATE, generateNumberOfAddedDays());
+        if (startDate.after(this.endDate)) {
             return 0;
         }
         int result = 0;
         do {
-            this.createdDate.add(Calendar.DATE, generateNumberOfAddedDays());
+            startDate.add(Calendar.DATE, generateNumberOfAddedDays());
             result += 1;
         }
-        while (this.createdDate.before(this.endDate));
+        while (startDate.before(this.endDate));
         return result;
     }
 
