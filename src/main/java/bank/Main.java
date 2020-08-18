@@ -39,7 +39,7 @@ public class Main {
         accounts.add(customer4);
         ProcessServices services = new ProcessServices(accounts);
 
-        services.Transfer();
+        services.Transfer(111, 222);
 
         customer3.showInfo();
         customer4.showInfo();
@@ -80,6 +80,22 @@ public class Main {
          *  customer1 chuyển tiền cho customer2 (tùy chọn cách gọi phương thức chuyển tiền ...)
          *
          * 3. Viết hoặc tùy chỉnh lại phương thức showInfo để in ra thông tin khách hàng sau khi thực hiện những giao dịch chuyển tiền giữa 2 khách hàng trên
+         *
+         * 4. Nếu là phương thức chuyển tiền qua lại giữa 2 khách hàng, ở phần lịch sử giao dịch hiển thị thêm thông tin như sau:
+         *  - nếu giao dịch chuyển tiền (transferOut): hiển thị thông tin người nhận
+         *          -------------------------------
+         *			+ Ngày giao dịch: 16-08-2020 05:11:03
+         *			+ Số tiền: 100000
+         *			+ Loại giao dịch: chuyển tiền đi
+         *          + Người nhận: Trang PM
+         *  - nếu giao dịch nhận tiền (transferIn): hiển thị thông tin người chuyển
+         *          -------------------------------
+         *			+ Ngày giao dịch : 16-08-2020 05:11:03
+         *			+ Số tiền: 100000
+         *			+ Loại giao dịch: nhận tiền
+         *          + Người chuyển: Trang PM
+         *
+         * 5. Viết lại phương thức tìm account theo accountId theo cách khác.
          * */
 
     }

@@ -29,6 +29,20 @@ public class Account {
     private Period period;
     //</editor-fold>
 
+    //<editor-fold desc="Getter Setter">
+    public long getAccountId() {
+        return accountId;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+    //</editor-fold>
+
     //<editor-fold desc="Constructor">
     public Account(long accountId, String firstName, String lastName) {
         this.accountId = accountId;
