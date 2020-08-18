@@ -1,7 +1,9 @@
 package bank;
 
 import java.time.temporal.WeekFields;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 
 public class Main {
     private static Object Month;
@@ -11,31 +13,36 @@ public class Main {
         Account customer1 = new Account(246, "Hanh", "Nguyen", Account.Period.Month);
         Account customer2 = new Account(211, "Nhat", "Nguyen", Account.Period.Year);
         Account customer3 = new Account(111, "Trang PM", "Nguyen", Account.Period.Week);
+        Account customer4 = new Account(222, "Thao", "Do", Account.Period.Week);
 
-        customer2.addMoney(100000);
+//        customer2.addMoney(100000);
+//        // Cho ngủ 3s để thấy đc thời điểm giao dịch khác nhau
+//        try {
+//            Thread.sleep(3 * 1000);
+//        } catch (InterruptedException e) {
+//            e.printStackTrace();
+//        }
+//        customer2.addMoney(148000);
+//        // Cho ngủ 3s để thấy đc thời điểm giao dịch khác nhau
+//        try {
+//            Thread.sleep(3 * 1000);
+//        } catch (InterruptedException e) {
+//            e.printStackTrace();
+//        }
+//        customer2.subMoney(5000);
 
-        // Cho ngủ 3s để thấy đc thời điểm giao dịch khác nhau
-        try {
-            Thread.sleep(3 * 1000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+//        customer2.showInfo();
+//        customer1.showInfo();
 
-        customer2.addMoney(148000);
+        List<Account> accounts = new ArrayList<>();
+        accounts.add(customer3);
+        accounts.add(customer4);
+        ProcessServices services = new ProcessServices(accounts);
 
-        // Cho ngủ 3s để thấy đc thời điểm giao dịch khác nhau
-        try {
-            Thread.sleep(3 * 1000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        services.Transfer();
 
-        customer2.subMoney(5000);
-
-        customer2.showInfo();
-
-        customer1.showInfo();
-
+        customer3.showInfo();
+        customer4.showInfo();
         /*
          *
          * 1. Viết hoặc tùy chỉnh lại phương thức showInfo để in ra thông tin khách hàng sau khi thực hiện những giao dịch trên theo những yêu cầu sau
