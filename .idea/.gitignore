@@ -117,7 +117,7 @@ fabric.properties
 
 # Mobile Tools for Java (J2ME)
 .mtj.tmp/
-
+s
 # Package Files #
 *.jar
 *.war
@@ -129,5 +129,7 @@ fabric.properties
 
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
+
+/target/.
 
 # End of https://www.toptal.com/developers/gitignore/api/intellij,java
