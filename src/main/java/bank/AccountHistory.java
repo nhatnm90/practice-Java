@@ -64,6 +64,17 @@ public class AccountHistory implements Comparable<AccountHistory> {
         this.balance = balance;
         this.type = type;
     }
+    public AccountHistory(long balance, Type type, long accountId) {
+        this.historyId =  UUID.randomUUID();
+        this.createdDate = Calendar.getInstance();
+        this.balance = balance;
+        this.type = type;
+        if (type == Type.transferIn) {
+            this.sourceAccountId = accountId;
+        } else if (type == Type.transferOut) {
+            this.destinationAccountId = accountId;
+        }
+    }
     //</editor-fold>
 
     //<editor-fold desc="Public functions">
@@ -75,5 +86,20 @@ public class AccountHistory implements Comparable<AccountHistory> {
         else
             return 1;
     }
+
+    public String translatedType() {
+        switch (type) {
+            case in:
+                return "Nạp tiền";
+            case out:
+                return "Rút tiền";
+            case transferIn:
+                return "Nhận tiền";
+            case transferOut:
+                return "Chuyển tiền";
+        }
+        return null;
+    }
+
     //</editor-fold>
 }
