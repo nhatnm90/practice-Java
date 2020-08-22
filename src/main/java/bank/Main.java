@@ -15,7 +15,7 @@ public class Main {
         Account customer3 = new Account(111, "Trang PM", "Nguyen", Account.Period.Week);
         Account customer4 = new Account(222, "Thao", "Do", Account.Period.Week);
 
-//        customer2.addMoney(100000);
+//        customer2.addMoney(100000, AccountHistory.Type.in);
 //        // Cho ngủ 3s để thấy đc thời điểm giao dịch khác nhau
 //        try {
 //            Thread.sleep(3 * 1000);
@@ -30,19 +30,31 @@ public class Main {
 //            e.printStackTrace();
 //        }
 //        customer2.subMoney(5000);
-
+//
 //        customer2.showInfo();
 //        customer1.showInfo();
 
+
+
+
+
         List<Account> accounts = new ArrayList<>();
+        accounts.add(customer1);
+        accounts.add(customer2);
         accounts.add(customer3);
         accounts.add(customer4);
         ProcessServices services = new ProcessServices(accounts);
 
-        services.Transfer(111, 222);
+        customer1.addMoney(50000, AccountHistory.Type.in);
+        services.Transfer(211, 246, 50000);
+        services.Transfer(246,211, 100000);
+        services.Transfer(246,211, 20000);
+        customer1.showInfo();
+        customer2.showInfo();
 
-        customer3.showInfo();
-        customer4.showInfo();
+
+//        customer3.showInfo();
+//        customer4.showInfo();
         /*
          *
          * 1. Viết hoặc tùy chỉnh lại phương thức showInfo để in ra thông tin khách hàng sau khi thực hiện những giao dịch trên theo những yêu cầu sau

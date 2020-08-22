@@ -7,7 +7,7 @@ import java.util.*;
 public class Account {
 
     //<editor-fold desc="Constant">
-    private static final long INITIALIZED_BALANCE = 50000;
+    private static final long INITIALIZED_BALANCE = 1000000;
 
     public enum Period {
         Week,
@@ -41,6 +41,23 @@ public class Account {
     public String getLastName() {
         return lastName;
     }
+
+    public long getCurrentBalance() {
+        return currentBalance;
+    }
+
+    public void setCurrentBalance(long currentBalance) {
+        this.currentBalance = currentBalance;
+    }
+
+    public void setHistories(List<AccountHistory> histories) {
+        this.histories = histories;
+    }
+
+    public List<AccountHistory> getHistories() {
+        return histories;
+    }
+
     //</editor-fold>
 
     //<editor-fold desc="Constructor">
@@ -148,6 +165,10 @@ public class Account {
     //</editor-fold>
 
     //<editor-fold desc="Public functions">
+    public static void dash(){
+        System.out.println("----------------------------------------");
+    }
+
     /*
      * Show Info
      * */
@@ -157,10 +178,20 @@ public class Account {
         System.out.println("- Số tiền trong tài khoản: " + currentBalance);
         System.out.println("- Ngày tạo tài khoản: " + formatDate(createdDate, "dd-MM-YYYY"));
         System.out.println("- Lịch sử giao dịch: ");
-        Collections.sort(histories);
-        for (AccountHistory accountHistory : histories) {
-            System.out.println(StringFormat.formatDate(accountHistory.getCreatedDate(), "dd-MM-yyyy hh:mm:ss"));
+        dash();
+        if (histories.isEmpty()){
+            System.out.println("- Khách hàng chưa có giao dịch");
+            dash();
+        } else {
+            Collections.sort(histories);
+            for (AccountHistory accountHistory : histories) {
+                System.out.println("- Ngày giao dịch: " + StringFormat.formatDate(accountHistory.getCreatedDate(), "dd-MM-yyyy hh:mm:ss"));
+                System.out.println("- Số tiền: " + accountHistory.getBalance());
+                System.out.println("- Loại giao dịch: " + accountHistory.translatedType());
+                dash();
+            }
         }
+
     }
 
     /*
@@ -168,25 +199,41 @@ public class Account {
      * Add histories to Account History list
      *  @param value of money
      * */
-    public void addMoney(long value) {
+    public void addMoney(long value, AccountHistory.Type type) {
         currentBalance = currentBalance + value;
-        AccountHistory history = new AccountHistory(value, AccountHistory.Type.in);
-        this.histories.add(history);
+        if(type == AccountHistory.Type.in){
+            AccountHistory history = new AccountHistory(value, AccountHistory.Type.in);
+            this.histories.add(history);
+        } else if (type == AccountHistory.Type.transferIn){
+            AccountHistory history = new AccountHistory(value, AccountHistory.Type.transferIn, accountId);
+            this.histories.add(history);
+        }
 
+
+
+
+//            AccountHistory history = new AccountHistory(value, AccountHistory.Type.transferOut);
+//            currentHistories.add(history);
+//            sourceAccount.setHistories(currentHistories);
     }
     /*
      * Recalculate current balance when subtracting money
      * Add histories to Account History list
      * @param value of money
      * */
-    public void subMoney(long value) {
+    public void subMoney(long value, AccountHistory.Type type) {
         if ((currentBalance - 50000) >= value) {
             currentBalance = currentBalance - value;
         } else {
             System.out.println("Số tiền trong tài khoản không đủ");
         }
-        AccountHistory history = new AccountHistory(value, AccountHistory.Type.out);
-        this.histories.add(history);
+        if(type == AccountHistory.Type.out){
+            AccountHistory history = new AccountHistory(value, AccountHistory.Type.out);
+            this.histories.add(history);
+        } else if (type == AccountHistory.Type.transferOut){
+            AccountHistory history = new AccountHistory(value, AccountHistory.Type.transferOut, accountId);
+            this.histories.add(history);
+        }
     }
 
     /*

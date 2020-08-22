@@ -25,17 +25,56 @@ public class ProcessServices {
     //</editor-fold>
 
     //<editor-fold desc="Public functions">
-    public void Transfer(long sourceAccountId, long destinationAccountId) {
+    public void checkValidAcc(long accountId){
+        if(this.findAccountById(accountId) == null){
+            System.out.println("Tài khoản " + accountId + "không tồn tại");
+        }
+    }
+
+//    public void addNewHistory (long accountId, AccountHistory.Type type) {
+//        Account
+//    }
+
+    public void Transfer(long sourceAccountId, long destinationAccountId, long value) {
         // validation
         if (this.accounts.size() < 2 || sourceAccountId == destinationAccountId) {
             return;
         }
         Account sourceAccount = this.findAccountById(sourceAccountId);
+        if(sourceAccount == null) {
+            System.out.println("Tài khoản " + sourceAccountId + "không tồn tại");
+            return;
+        }
+        if (sourceAccount.getCurrentBalance() - value < 50000) {
+            System.out.println("Số tiền trong tài khoản không đủ để thực hiện giao dịch");
+            return;
+        } else {
+            sourceAccount.subMoney(value, AccountHistory.Type.transferOut);
+//           long currentBalance = sourceAccount.getCurrentBalance();
+//            sourceAccount.setCurrentBalance(currentBalance - value);
+//            List<AccountHistory> currentHistories = sourceAccount.getHistories();
+//            AccountHistory history = new AccountHistory(value, AccountHistory.Type.transferOut);
+//            currentHistories.add(history);
+//            sourceAccount.setHistories(currentHistories);
+
+        }
         Account destinationAccount = this.findAccountById(destinationAccountId);
-        // todo: add logic to transfer money between 2 accounts above
-        sourceAccount.addMoney(11000);
-        destinationAccount.addMoney(15000);
-        destinationAccount.subMoney(11000);
+        if (destinationAccount == null) {
+            System.out.println("Tài khoản " + destinationAccountId + "không tồn tại");
+            return;
+        }
+        destinationAccount.addMoney(value, AccountHistory.Type.transferIn);
+
+//        long currentBalance = destinationAccount.getCurrentBalance();
+//        destinationAccount.setCurrentBalance(currentBalance + value);
+//        List<AccountHistory> currentHistories = destinationAccount.getHistories();
+//        AccountHistory history = new AccountHistory(value, AccountHistory.Type.transferIn);
+//        currentHistories.add(history);
+//        destinationAccount.setHistories(currentHistories);
+
+//        AccountHistory history = new AccountHistory(value, AccountHistory.Type.out);
+//        destinationAccount.setHistories();
+
     }
     //</editor-fold>
 
