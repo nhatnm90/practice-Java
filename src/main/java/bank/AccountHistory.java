@@ -1,9 +1,17 @@
 package bank;
 
+import utils.StringFormat;
+
+import java.text.NumberFormat;
 import java.util.Calendar;
+import java.util.Locale;
 import java.util.UUID;
 
-public class AccountHistory implements Comparable<AccountHistory> {
+public class AccountHistory {
+
+    //<editor-fold desc="Constant">
+    private static final String FORMAT_DATE_TEMPLATE = "dd-MM-yyyy hh:mm:ss";
+    //</editor-fold>
 
     //<editor-fold desc="Constant">
     public enum Type {
@@ -78,15 +86,6 @@ public class AccountHistory implements Comparable<AccountHistory> {
     //</editor-fold>
 
     //<editor-fold desc="Public functions">
-    public int compareTo(AccountHistory accountHistory) {
-        if (this.createdDate.equals(accountHistory.createdDate))
-            return 0;
-        else if (createdDate.after(accountHistory.createdDate))
-            return -1;
-        else
-            return 1;
-    }
-
     public String translatedType() {
         switch (type) {
             case in:
@@ -101,5 +100,11 @@ public class AccountHistory implements Comparable<AccountHistory> {
         return null;
     }
 
+    public void showInfo() {
+        System.out.println("- Ngày giao dịch: " + StringFormat.formatDate(this.createdDate, FORMAT_DATE_TEMPLATE));
+        System.out.println("- Số tiền: " + StringFormat.formatCurrency(this.balance));
+        System.out.println("- Loại giao dịch: " + this.translatedType());
+        StringFormat.printSeparatedLine();
+    }
     //</editor-fold>
 }

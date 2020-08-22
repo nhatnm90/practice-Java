@@ -139,7 +139,8 @@ public class MainObject_Answer {
             }
             // Nếu không thỏa -> ĐI TIẾP
         }
-        showInfo(minBalance);
+//        showInfo(minBalance);
+        minBalance.showInfo();
     }
 
     private static void showInfo(AccountHistory accountHistory) {

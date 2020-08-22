@@ -183,7 +183,7 @@ public class Account {
             System.out.println("- Khách hàng chưa có giao dịch");
             dash();
         } else {
-            Collections.sort(histories);
+            Collections.sort(histories, Comparator.comparing(AccountHistory::getCreatedDate).reversed());
             for (AccountHistory accountHistory : histories) {
                 System.out.println("- Ngày giao dịch: " + StringFormat.formatDate(accountHistory.getCreatedDate(), "dd-MM-yyyy hh:mm:ss"));
                 System.out.println("- Số tiền: " + accountHistory.getBalance());
