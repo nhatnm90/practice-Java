@@ -96,7 +96,7 @@ public class MainObject_Answer {
         // 1. SẮP XẾP: thuật toán để sắp xếp
         // Sắp xếp tăng dần (Ascending)
         // Cách 1:
-        // Collections.sort(listAccountHistory, comparing(AccountHistory::getBalance));
+        Collections.sort(listAccountHistory, comparing(AccountHistory::getBalance));
 
         // Cách 2:
 //        Collections.sort(listAccountHistory, (AccountHistory a1, AccountHistory a2) -> (int) (a1.getBalance() - a2.getBalance()));

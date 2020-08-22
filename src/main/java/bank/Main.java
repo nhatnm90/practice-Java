@@ -45,7 +45,6 @@ public class Main {
         accounts.add(customer4);
         ProcessServices services = new ProcessServices(accounts);
 
-        customer1.addMoney(50000, AccountHistory.Type.in);
         services.Transfer(211, 246, 50000);
         services.Transfer(246,211, 100000);
         services.Transfer(246,211, 20000);
