@@ -7,7 +7,7 @@ import java.util.*;
 public class Account {
 
     //<editor-fold desc="Constant">
-    private static final long INITIALIZED_BALANCE = 1000000;
+    private static final long INITIALIZED_BALANCE = 100;
 
     public enum Period {
         Week,
