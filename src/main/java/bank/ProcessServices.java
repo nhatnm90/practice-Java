@@ -5,6 +5,7 @@ import java.util.Arrays;
 import java.util.Calendar;
 import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 public class ProcessServices {
 
@@ -81,11 +82,22 @@ public class ProcessServices {
     //<editor-fold desc="Private functions">
     private Account findAccountById (long accountId) {
         return this.accounts.stream()
-                .filter(account -> {
-                    return account.getAccountId() == accountId;
-                })
-                .findAny()
+                .filter(account ->
+                        account.getAccountId() == accountId ||
+                        account.getCurrentBalance() > 6
+                ) // a = [abc]
+                .findAny() //= > abc
                 .orElse(null);
     }
+
+    private Account filter(long balance) {
+        List<Account> result = this.accounts.stream()
+                .filter(account -> account.getCurrentBalance() > balance)
+                .collect(Collectors.toList()); // return [a, b, c]
+        Account finalResult = result.stream().filter(x -> x.getCurrentBalance() == 50000).findAny().orElse(null);// return a
+        return finalResult;
+
+    }
+
     //</editor-fold>
 }

@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class MainObject_Answer {
     public static void main(String[] args){
@@ -73,10 +74,10 @@ public class MainObject_Answer {
         // Kết quả trả về là true nếu tìm thấy element trong danh sách, ngược lại trả về false.
         // boolean contains(element)
         boolean isNewAccountHistoryExisted = listAccountHistory.contains(newAccountHistory);
-        System.out.println("newAccountHistory " + (isNewAccountHistoryExisted ? "có" : "không") + " tồn tại trong mảng");
+//        System.out.println("newAccountHistory " + (isNewAccountHistoryExisted ? "có" : "không") + " tồn tại trong mảng");
 
         boolean isNeedToRemoveAccountHistoryExisted = listAccountHistory.contains(needToRemoveAccountHistory);
-        System.out.println("needToRemoveAccountHistory " + (isNeedToRemoveAccountHistoryExisted ? "có" : "không") + " tồn tại trong mảng");
+//        System.out.println("needToRemoveAccountHistory " + (isNeedToRemoveAccountHistoryExisted ? "có" : "không") + " tồn tại trong mảng");
 
         // Function tìm phần tử (element) theo thuộc tính có trong phần tử đó (element)
         // TODO: 8/19/2020
@@ -140,8 +141,55 @@ public class MainObject_Answer {
             // Nếu không thỏa -> ĐI TIẾP
         }
 //        showInfo(minBalance);
-        minBalance.showInfo();
+//        minBalance.showInfo();
+
+//        printArray(listAccountHistory);
+
+        List<AccountHistory> result = getBalanceListWithValue(listAccountHistory, 10);
+        System.out.println("Balance list with value < 100: ");
+        printArray(result);
+
+        List<AccountHistory> result1 = getBalanceListWithType(listAccountHistory, 10, AccountHistory.Type.transferOut);
+        System.out.println("Balance list with value < 100 & Type = transfer out: ");
+        printArray(result1);
+        AccountHistory result2 = getMaxBalance(listAccountHistory);
+        System.out.println("Max balance with type = transfer out");
+        result2.showInfo();
+
     }
+
+    /*
+        private Account findAccountById (long accountId) {
+        return this.accounts.stream()
+                .filter(account ->
+                        account.getAccountId() == accountId ||
+                        account.getCurrentBalance() > 6
+                ) // a = [abc]
+                .findAny() //= > abc
+                .orElse(null);
+    }
+     */
+    private static List<AccountHistory> getBalanceListWithValue (List<AccountHistory> listAccountHistory, long value){
+        return listAccountHistory.stream()
+                .filter(accountHistory -> accountHistory.getBalance() < value)
+                .collect(Collectors.toList());
+    }
+    private static List<AccountHistory> getBalanceListWithType (List<AccountHistory> listAccountHistory, long value, AccountHistory.Type type){
+        return listAccountHistory.stream()
+                .filter(accountHistory -> accountHistory.getBalance() < value && accountHistory.getType() == type)
+                .collect(Collectors.toList());
+    }
+    private static AccountHistory getMaxBalance (List<AccountHistory> listAccountHistory){
+        List<AccountHistory> transferOutList = listAccountHistory.stream()
+                .filter(accountHistory -> accountHistory.getType() == AccountHistory.Type.transferOut)
+                .collect(Collectors.toList());
+        Collections.sort(transferOutList, comparing(AccountHistory::getBalance).reversed());
+        return transferOutList.get(0);
+    }
+
+
+
+
 
     private static void showInfo(AccountHistory accountHistory) {
         System.out.println("Số tiền: " + accountHistory.getBalance());
@@ -150,9 +198,9 @@ public class MainObject_Answer {
         System.out.println("-------------------------------------------");
     }
 
-    private static void printArray(List<Integer> array) {
-        for (int element: array) {
-            System.out.println(element);
+    private static void printArray(List<AccountHistory> array) {
+        for (AccountHistory element: array) {
+            element.showInfo();
         }
     }
 

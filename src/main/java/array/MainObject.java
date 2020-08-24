@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.UUID;
 
 import static array.MainInteger.dash;
+import static java.util.Comparator.comparing;
 
 public class MainObject {
     public static void main(String[] args) {
@@ -129,8 +130,8 @@ public class MainObject {
 
         System.out.println(listAccountHistory);
         System.out.println("Câu c: ");
-        List<AccountHistory> cauC = MainObject.findElementBalanceMinValue(listAccountHistory);
-        System.out.println("-câu C: " + cauC.get(0));
+        AccountHistory cauC = MainObject.findElementBalanceMinValue(listAccountHistory);
+        cauC.showInfo();
 
 
         // chỗ này sau khi lấy đc cái danh sách mình phải in nó ra theo từng properties á,
@@ -198,15 +199,9 @@ public class MainObject {
 
 
     // c. Tìm history có balance nhỏ nhất (return 1 element duy nhất)
-    private static List<AccountHistory> findElementBalanceMinValue(List<AccountHistory> listAccountHistory){
-        ArrayList result = new ArrayList();
-        for(AccountHistory accountBalance : listAccountHistory){
-            //List<AccountHistory> minArray = new ArrayList<>();
-            long minValue = accountBalance.getBalance();
-            result.add(minValue);
-        }
-        Collections.sort(result);
-        return result;
+    private static AccountHistory findElementBalanceMinValue(List<AccountHistory> listAccountHistory){
+        Collections.sort(listAccountHistory, comparing(AccountHistory::getBalance));
+        return listAccountHistory.get(0);
     }
 
     // Câu này mình có thể làm theo 2 cách.
