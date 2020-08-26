@@ -58,10 +58,49 @@ public class Account {
         return histories;
     }
 
+    public Period getPeriod() {
+        return period;
+    }
+
+    public Calendar getCreatedDate() {
+        return createdDate;
+    }
+
+    public int getNumberOfHistory(){
+        return histories.size();
+    }
+
+    public long getTotalTransferIn(){
+        long money = 0;
+        for(AccountHistory element: histories){
+           if(element.getType() == AccountHistory.Type.transferIn){
+               money = money + element.getBalance();
+           }
+        }
+        return money;
+    }
+    public long reCalculateBalance(){
+        long money = 100;
+        for(AccountHistory element: histories){
+            switch (element.getType()){
+                case transferIn:
+                case in:
+                    money = money + element.getBalance();
+                break;
+                case out:
+                case transferOut:
+                    money = money - element.getBalance();
+                break;
+            }
+
+        }
+        return money;
+    }
+
     //</editor-fold>
 
     //<editor-fold desc="Constructor">
-    public Account(long accountId, String firstName, String lastName) {
+    public Account() {
         this.accountId = accountId;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -187,7 +226,17 @@ public class Account {
             for (AccountHistory accountHistory : histories) {
                 System.out.println("- Ngày giao dịch: " + StringFormat.formatDate(accountHistory.getCreatedDate(), "dd-MM-yyyy hh:mm:ss"));
                 System.out.println("- Số tiền: " + accountHistory.getBalance());
-                System.out.println("- Loại giao dịch: " + accountHistory.translatedType());
+                if (accountHistory.getType() == AccountHistory.Type.transferIn){
+                    System.out.println("- Loại giao dịch: " + accountHistory.translatedType());
+                    System.out.println("- Account ID người gửi: " + accountHistory.getDestinationAccountId());
+
+                } else if (accountHistory.getType() == AccountHistory.Type.transferOut){
+                    System.out.println("- Loại giao dịch: " + accountHistory.translatedType());
+                    System.out.println("- Account ID người nhận: " + accountHistory.getSourceAccountId());
+
+                } else {
+                    System.out.println("- Loại giao dịch: " + accountHistory.translatedType());
+                }
                 dash();
             }
         }
@@ -199,42 +248,47 @@ public class Account {
      * Add histories to Account History list
      *  @param value of money
      * */
-    public void addMoney(long value, AccountHistory.Type type) {
+    public void addMoney(long value) {
         currentBalance = currentBalance + value;
-        if(type == AccountHistory.Type.in){
             AccountHistory history = new AccountHistory(value, AccountHistory.Type.in);
-            this.histories.add(history);
-        } else if (type == AccountHistory.Type.transferIn){
-            AccountHistory history = new AccountHistory(value, AccountHistory.Type.transferIn, accountId);
             this.histories.add(history);
         }
 
 
-
-
-//            AccountHistory history = new AccountHistory(value, AccountHistory.Type.transferOut);
-//            currentHistories.add(history);
-//            sourceAccount.setHistories(currentHistories);
+    public void receiveMoney(long value, long accountId){
+        currentBalance = currentBalance + value;
+        AccountHistory history = new AccountHistory(value, AccountHistory.Type.transferIn, accountId);
+        this.histories.add(history);
     }
     /*
      * Recalculate current balance when subtracting money
      * Add histories to Account History list
      * @param value of money
      * */
-    public void subMoney(long value, AccountHistory.Type type) {
-        if ((currentBalance - 50000) >= value) {
+    public void subMoney(long value) {
+        if ((currentBalance - 100) >= value) {
             currentBalance = currentBalance - value;
         } else {
             System.out.println("Số tiền trong tài khoản không đủ");
+            return;
         }
-        if(type == AccountHistory.Type.out){
-            AccountHistory history = new AccountHistory(value, AccountHistory.Type.out);
-            this.histories.add(history);
-        } else if (type == AccountHistory.Type.transferOut){
-            AccountHistory history = new AccountHistory(value, AccountHistory.Type.transferOut, accountId);
-            this.histories.add(history);
-        }
+        AccountHistory history = new AccountHistory(value, AccountHistory.Type.out);
+        this.histories.add(history);
     }
+
+    public void transferMoney(long value, long accountId) {
+        if ((currentBalance - 100) >= value) {
+            currentBalance = currentBalance - value;
+        } else {
+            System.out.println("Số tiền trong tài khoản không đủ");
+            return;
+        }
+        AccountHistory history = new AccountHistory(value, AccountHistory.Type.transferOut, accountId);
+            this.histories.add(history);
+         }
+
+
+
 
     /*
      * Recalculate current balance with rate

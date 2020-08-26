@@ -71,6 +71,7 @@ public class AccountHistory {
         this.createdDate = Calendar.getInstance();
         this.balance = balance;
         this.type = type;
+
     }
     public AccountHistory(long balance, Type type, long accountId) {
         this.historyId =  UUID.randomUUID();
@@ -78,9 +79,10 @@ public class AccountHistory {
         this.balance = balance;
         this.type = type;
         if (type == Type.transferIn) {
-            this.sourceAccountId = accountId;
-        } else if (type == Type.transferOut) {
             this.destinationAccountId = accountId;
+        }
+        if (type == Type.transferOut) {
+            this.sourceAccountId = accountId;
         }
     }
     //</editor-fold>
