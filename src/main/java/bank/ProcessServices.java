@@ -27,11 +27,10 @@ public class ProcessServices {
 
     //<editor-fold desc="Public functions">
     public void checkValidAcc(long accountId){
-        if(this.findAccountById(accountId) == null){
+        if (this.findAccountById(accountId) == null){
             System.out.println("Tài khoản " + accountId + "không tồn tại");
         }
     }
-
 
     public void Transfer(long sourceAccountId, long destinationAccountId, long value) {
         // validation
@@ -45,33 +44,22 @@ public class ProcessServices {
             return;
         }
         // check valid balance
-        if (sourceAccount.getCurrentBalance() - value < 100) {
-            System.out.println("Số tiền trong tài khoản không đủ để thực hiện giao dịch");
-            return;
-        }
+
+        // todo: DO NOT need to validate in this function due to the validation was existed in the transferMoney function
+
+        // if (!sourceAccount.isValidCurrentBalance(value)) {
+        //    System.out.println("Số tiền trong tài khoản không đủ để thực hiện giao dịch");
+        //    return;
+        // }
 
         sourceAccount.transferMoney(value, destinationAccountId);
-//           long currentBalance = sourceAccount.getCurrentBalance();
-//            sourceAccount.setCurrentBalance(currentBalance - value);
-//            List<AccountHistory> currentHistories = sourceAccount.getHistories();
-//            AccountHistory history = new AccountHistory(value, AccountHistory.Type.transferOut);
-//            currentHistories.add(history);
-//            sourceAccount.setHistories(currentHistories);
+
         Account destinationAccount = this.findAccountById(destinationAccountId);
         if (destinationAccount == null) {
             System.out.println("Tài khoản " + destinationAccountId + "không tồn tại");
             return;
         }
         destinationAccount.receiveMoney(value, sourceAccountId);
-//        long currentBalance = destinationAccount.getCurrentBalance();
-//        destinationAccount.setCurrentBalance(currentBalance + value);
-//        List<AccountHistory> currentHistories = destinationAccount.getHistories();
-//        AccountHistory history = new AccountHistory(value, AccountHistory.Type.transferIn);
-//        currentHistories.add(history);
-//        destinationAccount.setHistories(currentHistories);
-
-//        AccountHistory history = new AccountHistory(value, AccountHistory.Type.out);
-//        destinationAccount.setHistories();
 
     }
     //</editor-fold>

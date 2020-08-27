@@ -164,7 +164,7 @@ public class MainObject_Advance {
         System.out.println("Tổng tiền tài khoản có nhiều giao dịch nhất = " + cau10.getCurrentBalance());
 
         printSeparatedLine(60, "~");
-        
+
         // Câu 11
         System.out.println("Câu 11: ");
         for (Account element: listAccount){
@@ -173,16 +173,26 @@ public class MainObject_Advance {
         }
     }
 
-
+    //<editor-fold desc="Private functions">
     private static void showInfoBasic(Account account) {
         printSeparatedLine(50, "=");
-        System.out.println("Ho ten: " + account.getFirstName() + " " + account.getLastName());
-        System.out.println("Ngay tao: " + formatDate(account.getCreatedDate()));
+        System.out.println("Họ tên: " + account.getFirstName() + " " + account.getLastName());
+        System.out.println("Ngày tạo: " + formatDate(account.getCreatedDate()));
         System.out.println("Số tiền: " + formatCurrency(account.getCurrentBalance()));
         System.out.println("Loại kỳ hạn: " + account.getPeriod());
+    }
+
+    private static void showInfo(Account account, AccountHistory.Type type) {
+        List<AccountHistory> listAccountHistory = account.getHistories().stream().filter(transferIn ->
+                transferIn.getType() == type).collect(Collectors.toList());
+        showInfo(account, listAccountHistory);
     }
 
     private static void showInfo(Account account){
+        showInfo(account, account.getHistories());
+    }
+
+    private static void showInfo(Account account, List<AccountHistory> listAccountHistory){
      //   printSeparatedLine(50, "=");
         System.out.println("Ho ten: " + account.getFirstName() + " " + account.getLastName());
         System.out.println("Ngay tao: " + formatDate(account.getCreatedDate()));
@@ -193,7 +203,7 @@ public class MainObject_Advance {
             System.out.println("Tài khoản chưa thực hiện bất kì giao dịch nào");
 
         }
-        for (AccountHistory history : account.getHistories()) {
+        for (AccountHistory history : listAccountHistory) {
             dash();
             System.out.println("Ngày tạo: " + formatDate(history.getCreatedDate(), "dd-MM-yyyy hh:mm:ss"));
             System.out.println("Số tiền: " + formatCurrency(history.getBalance()));
@@ -201,29 +211,7 @@ public class MainObject_Advance {
         }
         printSeparatedLine(50, "=");
     }
-    private static void showInfo(Account account, AccountHistory.Type type){
-     //   printSeparatedLine(50, "=");
-        System.out.println("Ho ten: " + account.getFirstName() + " " + account.getLastName());
-        System.out.println("Ngay tao: " + formatDate(account.getCreatedDate()));
-        System.out.println("Số tiền: " + formatCurrency(account.getCurrentBalance()));
-        System.out.println("Loại kỳ hạn: " + account.getPeriod());
-        System.out.println("Lịch sử giao dịch: ");
-        if (account.getHistories().size() == 0) {
-            System.out.println("Tài khoản chưa thực hiện bất kì giao dịch nào");
-
-        }
-        List<AccountHistory> transferInList = account.getHistories().stream().filter(transferIn ->
-                transferIn.getType() == type).collect(Collectors.toList());
-        for (AccountHistory history : transferInList) {
-            // if (history.getType() == type) {
-            dash();
-            System.out.println("Ngày tạo: " + formatDate(history.getCreatedDate(), "dd-MM-yyyy hh:mm:ss"));
-            System.out.println("Số tiền: " + formatCurrency(history.getBalance()));
-            System.out.println("Loại giao dịch: " + history.translatedType());
-            // }
-        }
-        printSeparatedLine(50, "=");
-    }
+    //</editor-fold>
 }
 
 
@@ -309,7 +297,119 @@ public class MainObject_Advance {
 *  Sau đó in tất cả ra màn hình.
 *  *Biết số tiền lúc đầu của mọi tài khoản là $100
 *
-*  Câu 12+: Hoàn thành phương thức chuyển tiền trong class ProcessServices
+*  Câu 12: Hiển thị thông tin các tài khoản và lịch sử giao dịch của tài khoản đó theo mẫu dưới đây
+*   Lưu ý: các dấu ngăn cách giữa cách tài khoản và lịch sử giao dịch nên đc hiển thị đúng chính xác theo ví dụ
+*   Ví dụ:
+*   ===============================================
+*   Họ tên: Hanh Nguyen
+*   Ngày tạo: 24-06-2020
+*   Số tiền: $150
+*   Loại kỳ hạn: Tháng
+*   Lịch sử giao dịch:
+*   ************************************************
+*   Ngày tạo: 25-06-2020 16:16:16
+*   Số tiền: $50
+*   Loại giao dịch: Nạp tiền
+*   -----------------------------------------------
+*   Ngày tạo: 25-06-2020 16:16:10
+*   Số tiền: $50
+*   Loại giao dịch: Nhận tiền
+*   Người gửi: Nhat Nguyen
+*   -----------------------------------------------
+*   Ngày tạo: 25-06-2020 16:16:01
+*   Số tiền: $10
+*   Loại giao dịch: Chuyển tiền
+*   Người nhận: Huong Cao
+*   ================================================
+*   Họ tên: Trang PM Nguyen
+*   Ngày tạo: 24-06-2020
+*   Số tiền: $100
+*   Loại kỳ hạn: Năm
+*   Lịch sử giao dịch: Tài khoản chưa thực hiện giao dịch
+*   ================================================
+*   ... (còn lại)
+*
+*   Câu 13: Xuất ra màn hình TỔNG số lượng các giao dịch đã được thực hiện của tất cả các tài khoản
+*   VD: Hệ thống có 2 tài khoản thôi
+*   - Tài khoản Hạnh Nguyễn: 10 giao dịch (dựa vào lịch sử giao dịch)
+*   - Tài khoản Nhật Nguyễn: 7 giao dịch (dựa vào lịch sử giao dịch)
+*   -> Tổng số giao dịch của cả hệ thống là 17
+*
+*   Câu 14: Xuất ra màn hình tất cả các thông tin giao dịch là loại là  NẠP TIỀN (in) của tất cả các tài khoản đang có
+*   và sắp xếp theo thứ tự ngày giao dịch giảm dần (latest -> oldest) theo mẫu dưới đây
+*   -----------------------------------------------
+*   Ngày tạo: 26-06-2020 10:58:10
+*   Số tiền: $50
+*   Người nạp: Hanh Nguyen
+*  -----------------------------------------------
+*   Ngày tạo: 25-06-2020 16:16:10
+*   Số tiền: $50
+*   Người nạp: Hanh Nguyen
+*  -----------------------------------------------
+*   Ngày tạo: 24-06-2020 16:00:10
+*   Số tiền: $50
+*   Người nạp: Trang PM Nguyen
+*  -----------------------------------------------
+*
+*   Câu 15: Xuất ra màn hình TỔNG số tiền đã được NẠP VÀO hệ thống
+*
+*   Câu 16: Xuất ra màn hình TỔNG số tiền đã được RÚT RA khỏi hệ thống
+*
+*   Câu 17: Xuất ra màn hình TOP 3 giao dịch có số tiền LỚN nhất trong hệ thống (không phân biệt loại giao dịch)
+*   Ví dụ:
+*  -----------------------------------------------
+*   Ngày tạo: 26-06-2020 10:58:10
+*   Số tiền: $10000
+*   Người tạo: Hanh Nguyen
+*  -----------------------------------------------
+*   Ngày tạo: 25-06-2020 16:16:10
+*   Số tiền: $4999
+*   Người nạp: Hanh Nguyen
+*  -----------------------------------------------
+*   Ngày tạo: 24-06-2020 16:00:10
+*   Số tiền: $3000
+*   Người nạp: Trang PM Nguyen
+*  -----------------------------------------------
+*
+*   Câu 18: Xuất ra màn hình TOP 3 giao dịch có số tiền NHỎ nhất trong hệ thống (chỉ tính giao dịch nạp tiền)
+*   Ví dụ:
+*   -----------------------------------------------
+*   Ngày tạo: 26-06-2020 10:58:10
+*   Số tiền: $10
+*   Người tạo: Hanh Nguyen
+*   -----------------------------------------------
+*   Ngày tạo: 25-06-2020 16:16:10
+*   Số tiền: $23
+*   Người nạp: Hanh Nguyen
+*   -----------------------------------------------
+*   Ngày tạo: 24-06-2020 16:00:10
+*   Số tiền: $40
+*   Người nạp: Trang PM Nguyen
+*  -----------------------------------------------
+*
+*   Câu 19: Viết 1 hàm (function) dùng để lấy số lượng phần tử (element) cần thiết trong 1 mảng cho trước (array)
+*   Ví dụ phần khai báo hàm, phần cần viết là phần thân hàm
+*   private List<Account> getListElementByNumber(List<Account> listAccount, int numberOfGetting) {
+*       //todo: implement the logic to get elements
+*       //notes: check the condition before as comparing numberOfGetting with the size of list etc
+*   }
+*
+*   Câu 20: Xuất ra màn hình danh sách các tài khoản và giao dịch có số tiền lớn nhất đc thực hiện bởi tài khoản đó
+*   Ví dụ:
+*   ===============================================
+*   Họ tên: Hanh Nguyen
+*   Giao dịch lớn nhất:
+*       Ngày tạo: 25-06-2020 16:16:16
+*       Số tiền: $9000
+*       Loại giao dịch: Nạp tiền
+*   -----------------------------------------------
+*   Họ tên: Nhat Nguyen
+*   Giao dịch lớn nhất:
+*       Ngày tạo: 25-06-2020 14:24:24
+*       Số tiền: $900
+*       Loại giao dịch: Rút tiền
+*   ================================================
+*   ...
 */
 
 
