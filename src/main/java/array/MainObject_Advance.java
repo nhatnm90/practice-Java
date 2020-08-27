@@ -9,8 +9,11 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 import static array.MainInteger.dash;
+import static java.util.Comparator.comparing;
+import static utils.StringFormat.*;
 
 public class MainObject_Advance {
     public static void main(String[] args) {
@@ -30,6 +33,7 @@ public class MainObject_Advance {
         accountHistoriesHN.add(new AccountHistory(40, AccountHistory.Type.transferIn, accountDB.getAccountId()));
         accountHistoriesHN.add(new AccountHistory(16, AccountHistory.Type.in));
         accountHistoriesHN.add(new AccountHistory(24, AccountHistory.Type.in));
+        accountHistoriesHN.add(new AccountHistory(11, AccountHistory.Type.out));
         accountHN.setHistories(accountHistoriesHN);
 
         List<AccountHistory> accountHistoriesNH = new ArrayList<>();
@@ -64,8 +68,164 @@ public class MainObject_Advance {
 
         // Tạo 1 đối tượng xử lý tài khoản và truyền danh sách tài khoản vào constructor parameters
         ProcessServices processServices = new ProcessServices(listAccount);
+
+        // * Câu 1: Xuất ra màn hình số lượng tài khoản đang có trong hệ thống
+        System.out.println("Câu 1: Số luong tai khoản = " + listAccount.size());
+        printSeparatedLine(60, "~");
+
+        //Câu 2: Xuất ra màn hình DANH SÁCH chỉ có HỌ và TÊN của các tài
+        System.out.println("Câu 2: ");
+        for (int i = 0; i < listAccount.size(); i++) {
+            String fullName = listAccount.get(i).getFirstName() + " " + listAccount.get(i).getLastName();
+            System.out.println(+i + 1 + "/ " + "Full Name: " + fullName);
+        }
+        printSeparatedLine(60, "~");
+
+        //* Câu 3: Xuất ra màn hình SỐ LƯỢNG tài khoản đang chọn kì hạn là tuần, tháng, quý
+        int periodWeek = 0;
+        for (Account element : listAccount) {
+            if (element.getPeriod() != Account.Period.Year) {
+                periodWeek++;
+            }
+        }
+        System.out.println("Câu 3: SỐ LƯỢNG tài khoản đang chọn kì hạn là tuần, tháng, quý = " + periodWeek);
+        printSeparatedLine(60, "~");
+
+        //* Câu 4: Xuất ra màn hình SỐ LƯỢNG tài khoản đang chọn kì hạn là tháng mà có họ là "Nguyen"
+        List<Account> cau4 = listAccount.stream().filter(account -> account.getPeriod() == Account.Period.Month
+                && account.getLastName() == "Nguyen").collect(Collectors.toList());
+        System.out.println("Câu 4: SỐ LƯỢNG tài khoản đang chọn kì hạn là tháng mà có họ là Nguyen = " + cau4.size());
+        printSeparatedLine(60, "~");
+
+        //* Câu 5: Xuất ra màn hình DANH SÁCH chỉ có HỌ và TÊN các tài khoản có TÊN dài 4 chữ cái ("Hanh" -> 4, "Huong" -> 5)
+        List<Account> cau5 = listAccount.stream().filter(account -> account.getFirstName().length() == 4).collect(Collectors.toList());
+        System.out.println("Câu 5: HỌ và TÊN các tài khoản có TÊN dài 4 chữ cái: ");
+        int number = 1;
+        for (Account element : cau5) {
+            String fullNameCau5 = element.getFirstName() + " " + element.getLastName();
+            System.out.println(number + "/ " + fullNameCau5);
+            number++;
+        }
+        printSeparatedLine(60, "~");
+
+
+        //* Câu 6: Xuất ra màn hình DANH SÁCH TẤT CẢ tài khoản đang có trong hệ thống (bao thông tin tài khoản và cả thông tin lịch sử giao dịch)
+        System.out.println("Câu 6: ");
+        for (Account element : listAccount) {
+            showInfo(element);
+        }
+        printSeparatedLine(60, "~");
+
+        //* Câu 7: Xuất ra màn hình SỐ LƯỢNG tài khoản đang có trong hệ thống mà chưa thực hiện bất kì giao dịch nào
+        int noOfNoTransactionAcc = 0;
+        for (Account element : listAccount) {
+            if (element.getHistories().size() == 0) {
+                noOfNoTransactionAcc++;
+            }
+        }
+        System.out.println("Câu 7: SỐ LƯỢNG tài khoản đang có trong hệ thống mà chưa thực hiện bất kì giao dịch nào = " + noOfNoTransactionAcc);
+        printSeparatedLine(60, "~");
+
+        //* Câu 8: Xuất ra màn hình thông tin tài khoản có nhiều giao dịch nhất
+        Collections.sort(listAccount, comparing(Account::getNumberOfHistory).reversed());
+        Account cau8a = listAccount.get(0);
+
+        System.out.println("Câu 8a: tài khoản có nhiều giao dịch nhất: ");
+        showInfo(cau8a);
+
+
+        int numberOfTransaction = 0;
+        Account cau8 = new Account();
+        for (Account element : listAccount) {
+            if (element.getHistories().size() > numberOfTransaction) {
+                numberOfTransaction = element.getHistories().size();
+                cau8 = element;
+            }
+
+        }
+        System.out.println("Câu 8: tài khoản có nhiều giao dịch nhất: ");
+        showInfo(cau8);
+
+        printSeparatedLine(60, "~");
+
+        //Câu 9: Xuất ra màn hình thông tin tài khoản có nhiều giao dịch nhận tiền vào nhất
+        System.out.println("Câu 9: tài khoản có nhiều giao dịch nhận tiền vào nhất: ");
+        Collections.sort(listAccount, comparing(Account::getTotalTransferIn).reversed());
+        Account cau9 = listAccount.get(0);
+        showInfo(cau9, AccountHistory.Type.transferIn);
+
+        printSeparatedLine(60, "~");
+
+        // Câu 10
+        System.out.println("Câu 10: ");
+        Collections.sort(listAccount, comparing(Account::getNumberOfHistory).reversed());
+        Account cau10 = listAccount.get(0);
+        cau10.setCurrentBalance(cau10.reCalculateBalance());
+        System.out.println("Tổng tiền tài khoản có nhiều giao dịch nhất = " + cau10.getCurrentBalance());
+
+        printSeparatedLine(60, "~");
+        
+        // Câu 11
+        System.out.println("Câu 11: ");
+        for (Account element: listAccount){
+            element.setCurrentBalance(element.reCalculateBalance());
+            showInfoBasic(element);
+        }
+    }
+
+
+    private static void showInfoBasic(Account account) {
+        printSeparatedLine(50, "=");
+        System.out.println("Ho ten: " + account.getFirstName() + " " + account.getLastName());
+        System.out.println("Ngay tao: " + formatDate(account.getCreatedDate()));
+        System.out.println("Số tiền: " + formatCurrency(account.getCurrentBalance()));
+        System.out.println("Loại kỳ hạn: " + account.getPeriod());
+    }
+
+    private static void showInfo(Account account){
+     //   printSeparatedLine(50, "=");
+        System.out.println("Ho ten: " + account.getFirstName() + " " + account.getLastName());
+        System.out.println("Ngay tao: " + formatDate(account.getCreatedDate()));
+        System.out.println("Số tiền: " + formatCurrency(account.getCurrentBalance()));
+        System.out.println("Loại kỳ hạn: " + account.getPeriod());
+        System.out.println("Lịch sử giao dịch: ");
+        if (account.getHistories().size() == 0) {
+            System.out.println("Tài khoản chưa thực hiện bất kì giao dịch nào");
+
+        }
+        for (AccountHistory history : account.getHistories()) {
+            dash();
+            System.out.println("Ngày tạo: " + formatDate(history.getCreatedDate(), "dd-MM-yyyy hh:mm:ss"));
+            System.out.println("Số tiền: " + formatCurrency(history.getBalance()));
+            System.out.println("Loại giao dịch: " + history.translatedType());
+        }
+        printSeparatedLine(50, "=");
+    }
+    private static void showInfo(Account account, AccountHistory.Type type){
+     //   printSeparatedLine(50, "=");
+        System.out.println("Ho ten: " + account.getFirstName() + " " + account.getLastName());
+        System.out.println("Ngay tao: " + formatDate(account.getCreatedDate()));
+        System.out.println("Số tiền: " + formatCurrency(account.getCurrentBalance()));
+        System.out.println("Loại kỳ hạn: " + account.getPeriod());
+        System.out.println("Lịch sử giao dịch: ");
+        if (account.getHistories().size() == 0) {
+            System.out.println("Tài khoản chưa thực hiện bất kì giao dịch nào");
+
+        }
+        List<AccountHistory> transferInList = account.getHistories().stream().filter(transferIn ->
+                transferIn.getType() == type).collect(Collectors.toList());
+        for (AccountHistory history : transferInList) {
+            // if (history.getType() == type) {
+            dash();
+            System.out.println("Ngày tạo: " + formatDate(history.getCreatedDate(), "dd-MM-yyyy hh:mm:ss"));
+            System.out.println("Số tiền: " + formatCurrency(history.getBalance()));
+            System.out.println("Loại giao dịch: " + history.translatedType());
+            // }
+        }
+        printSeparatedLine(50, "=");
     }
 }
+
 
 /*
 * Câu 1: Xuất ra màn hình số lượng tài khoản đang có trong hệ thống
@@ -151,3 +311,5 @@ public class MainObject_Advance {
 *
 *  Câu 12+: Hoàn thành phương thức chuyển tiền trong class ProcessServices
 */
+
+

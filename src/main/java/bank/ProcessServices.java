@@ -32,9 +32,6 @@ public class ProcessServices {
         }
     }
 
-//    public void addNewHistory (long accountId, AccountHistory.Type type) {
-//        Account
-//    }
 
     public void Transfer(long sourceAccountId, long destinationAccountId, long value) {
         // validation
@@ -42,30 +39,30 @@ public class ProcessServices {
             return;
         }
         Account sourceAccount = this.findAccountById(sourceAccountId);
+        // check valid account
         if(sourceAccount == null) {
             System.out.println("Tài khoản " + sourceAccountId + "không tồn tại");
             return;
         }
-        if (sourceAccount.getCurrentBalance() - value < 50000) {
+        // check valid balance
+        if (sourceAccount.getCurrentBalance() - value < 100) {
             System.out.println("Số tiền trong tài khoản không đủ để thực hiện giao dịch");
             return;
-        } else {
-            sourceAccount.subMoney(value, AccountHistory.Type.transferOut);
+        }
+
+        sourceAccount.transferMoney(value, destinationAccountId);
 //           long currentBalance = sourceAccount.getCurrentBalance();
 //            sourceAccount.setCurrentBalance(currentBalance - value);
 //            List<AccountHistory> currentHistories = sourceAccount.getHistories();
 //            AccountHistory history = new AccountHistory(value, AccountHistory.Type.transferOut);
 //            currentHistories.add(history);
 //            sourceAccount.setHistories(currentHistories);
-
-        }
         Account destinationAccount = this.findAccountById(destinationAccountId);
         if (destinationAccount == null) {
             System.out.println("Tài khoản " + destinationAccountId + "không tồn tại");
             return;
         }
-        destinationAccount.addMoney(value, AccountHistory.Type.transferIn);
-
+        destinationAccount.receiveMoney(value, sourceAccountId);
 //        long currentBalance = destinationAccount.getCurrentBalance();
 //        destinationAccount.setCurrentBalance(currentBalance + value);
 //        List<AccountHistory> currentHistories = destinationAccount.getHistories();
@@ -83,8 +80,7 @@ public class ProcessServices {
     private Account findAccountById (long accountId) {
         return this.accounts.stream()
                 .filter(account ->
-                        account.getAccountId() == accountId ||
-                        account.getCurrentBalance() > 6
+                        account.getAccountId() == accountId
                 ) // a = [abc]
                 .findAny() //= > abc
                 .orElse(null);
