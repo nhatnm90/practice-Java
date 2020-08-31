@@ -43,17 +43,7 @@ public class ProcessServices {
             System.out.println("Tài khoản " + sourceAccountId + "không tồn tại");
             return;
         }
-        // check valid balance
-
-        // todo: DO NOT need to validate in this function due to the validation was existed in the transferMoney function
-
-        // if (!sourceAccount.isValidCurrentBalance(value)) {
-        //    System.out.println("Số tiền trong tài khoản không đủ để thực hiện giao dịch");
-        //    return;
-        // }
-
         sourceAccount.transferMoney(value, destinationAccountId);
-
         Account destinationAccount = this.findAccountById(destinationAccountId);
         if (destinationAccount == null) {
             System.out.println("Tài khoản " + destinationAccountId + "không tồn tại");

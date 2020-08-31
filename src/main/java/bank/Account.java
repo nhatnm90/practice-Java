@@ -3,6 +3,9 @@ import utils.StringFormat;
 
 import java.text.SimpleDateFormat;
 import java.util.*;
+import java.util.stream.Collectors;
+
+import static java.util.Comparator.comparing;
 
 public class Account {
 
@@ -21,6 +24,7 @@ public class Account {
     private long accountId;
     private String firstName;
     private String lastName;
+    private String fullName;
     private Calendar createdDate;
     private float rate;
     private long currentBalance;
@@ -30,6 +34,17 @@ public class Account {
     //</editor-fold>
 
     //<editor-fold desc="Getter Setter">
+
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+
     public long getAccountId() {
         return accountId;
     }
@@ -40,6 +55,14 @@ public class Account {
 
     public String getLastName() {
         return lastName;
+    }
+
+    public String getFullName() {
+        return fullName;
+    }
+
+    public String setFullName(String firstName, String lastName) {
+        return firstName + " " + lastName;
     }
 
     public long getCurrentBalance() {
@@ -103,6 +126,11 @@ public class Account {
     public Account() {
         this.createdDate = Calendar.getInstance();
         this.currentBalance = INITIALIZED_BALANCE;
+    }
+
+    public Account(List<AccountHistory> history, String fullName) {
+        this.fullName = fullName;
+        this.histories = history;
     }
 
     public Account(long accountId, String firstName, String lastName, Period period) {
@@ -224,6 +252,22 @@ public class Account {
     //</editor-fold>
 
     //<editor-fold desc="Public functions">
+
+
+
+    public String getNameById (List<Account> listAccount, long accountId){
+       Account account =  listAccount.stream().filter(id -> id.getAccountId() == accountId)
+               .findAny().orElse(null);
+       String fullName = account.getFirstName() + " " + account.getLastName();
+        return fullName;
+    }
+
+    public List<AccountHistory> getAccountByType (AccountHistory.Type type){
+        List<AccountHistory> listAccountHistory = this.getHistories().stream().filter(transferIn ->
+                transferIn.getType() == type).collect(Collectors.toList());
+        return listAccountHistory;
+    }
+
     public static void dash(){
         System.out.println("----------------------------------------");
     }
@@ -242,7 +286,7 @@ public class Account {
             System.out.println("- Khách hàng chưa có giao dịch");
             dash();
         } else {
-            Collections.sort(histories, Comparator.comparing(AccountHistory::getCreatedDate).reversed());
+            Collections.sort(histories, comparing(AccountHistory::getCreatedDate).reversed());
             for (AccountHistory accountHistory : histories) {
                 System.out.println("- Ngày giao dịch: " + StringFormat.formatDate(accountHistory.getCreatedDate(), "dd-MM-yyyy hh:mm:ss"));
                 System.out.println("- Số tiền: " + accountHistory.getBalance());
