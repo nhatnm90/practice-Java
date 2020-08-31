@@ -249,11 +249,11 @@ public class MainObject_Advance {
 
         // Câu 13
         System.out.println("Câu 13: ");
-        int number13 = 0;
+        int numberOfTotalTransactions = 0;
         for (Account element : listAccount) {
-            number13 = element.getHistories().size() + number13;
+            numberOfTotalTransactions += element.getHistories().size();
         }
-        System.out.println("Tổng số giao dịch của hệ thống là: " + number13);
+        System.out.println("Tổng số giao dịch của hệ thống là: " + numberOfTotalTransactions);
         printSeparatedLine(60, "~");
 
         // Câu 14:
@@ -262,7 +262,7 @@ public class MainObject_Advance {
         for (Account element : listAccount) {
             List<AccountHistory> listAccountHistory = element.getAccountByType(AccountHistory.Type.in);
             for (AccountHistory accountHistory : listAccountHistory) {
-                accountHistory.fullName = element.getFirstName() + " " + element.getLastName();
+                accountHistory.fullName = element.getFullName();
                 typeInList.add(accountHistory);
             }
         }
@@ -276,7 +276,7 @@ public class MainObject_Advance {
         System.out.println("Câu 15: ");
         long totalInBalance = 0;
         for (AccountHistory element : typeInList) {
-            totalInBalance = element.getBalance() + totalInBalance;
+            totalInBalance += element.getBalance();
         }
         System.out.println("TỔNG số tiền đã được NẠP VÀO hệ thống = " + totalInBalance);
         printSeparatedLine(60, "~");
@@ -287,7 +287,7 @@ public class MainObject_Advance {
         for (Account element : listAccount) {
             List<AccountHistory> cau16 = element.getAccountByType(AccountHistory.Type.out);
             for (AccountHistory balance : cau16) {
-                totalOutBalance = balance.getBalance() + totalOutBalance;
+                totalOutBalance += balance.getBalance();
             }
 
         }
@@ -351,7 +351,7 @@ public class MainObject_Advance {
 
     private static List<Account> getListElementByNumber(List<Account> listAccount, int numberOfGetting) {
         if (numberOfGetting > listAccount.size()) {
-            return null;
+            return listAccount;
         } else {
             List<Account> listElementByNumber = new ArrayList<>();
             for (int i = 0; i < numberOfGetting; i++) {
@@ -363,7 +363,7 @@ public class MainObject_Advance {
 
     private static List<AccountHistory> getListHistoryByNumber(List<AccountHistory> listAccount, int numberOfGetting) {
         if (numberOfGetting > listAccount.size()) {
-            return null;
+            return listAccount;
         } else {
             List<AccountHistory> listHistoryByNumber = new ArrayList<>();
             for (int i = 0; i < numberOfGetting; i++) {
