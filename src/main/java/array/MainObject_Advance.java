@@ -143,7 +143,7 @@ public class MainObject_Advance {
         //Câu 2: Xuất ra màn hình DANH SÁCH chỉ có HỌ và TÊN của các tài
         System.out.println("Câu 2: ");
         for (int i = 0; i < listAccount.size(); i++) {
-            String fullName = listAccount.get(i).getFirstName() + " " + listAccount.get(i).getLastName();
+            String fullName = listAccount.get(i).getFullName();
             System.out.println(+i + 1 + "/ " + "Full Name: " + fullName);
         }
         printSeparatedLine(60, "~");
@@ -169,7 +169,7 @@ public class MainObject_Advance {
         System.out.println("Câu 5: HỌ và TÊN các tài khoản có TÊN dài 4 chữ cái: ");
         int number = 1;
         for (Account element : cau5) {
-            String fullNameCau5 = element.getFirstName() + " " + element.getLastName();
+            String fullNameCau5 = element.getFullName();
             System.out.println(number + "/ " + fullNameCau5);
             number++;
         }
@@ -234,7 +234,7 @@ public class MainObject_Advance {
 
         // Câu 11
         System.out.println("Câu 11: ");
-        for (Account element: listAccount){
+        for (Account element : listAccount) {
             element.setCurrentBalance(element.reCalculateBalance());
             showInfoBasic(element);
         }
@@ -296,34 +296,43 @@ public class MainObject_Advance {
 
         //   Câu 17:
         System.out.println("Câu 17: ");
-        List<AccountHistory> cau17 = new ArrayList<>();
+        List<AccountHistory> topMaxBalance = new ArrayList<>();
         for (Account element : listAccount) {
             for (AccountHistory history : element.getHistories()) {
                 if (history.getType() == AccountHistory.Type.transferIn) {
                     history.fullName = element.getNameById(listAccount, history.getDestinationAccountId());
                 } else {
-                    history.fullName = element.getFirstName() + " " + element.getLastName();
+                    history.fullName = element.getFullName();
                 }
-                cau17.add(history);
+                topMaxBalance.add(history);
             }
-            Collections.sort(cau17, comparing(AccountHistory::getBalance).reversed());
         }
-        cau17.get(0).showInfoWithoutType();
-        cau17.get(1).showInfoWithoutType();
-        cau17.get(2).showInfoWithoutType();
+        Collections.sort(topMaxBalance, comparing(AccountHistory::getBalance).reversed());
+        topMaxBalance = getListHistoryByNumber(topMaxBalance, 3);
+        for (AccountHistory element : topMaxBalance) {
+            element.showInfoWithoutType();
+        }
         printSeparatedLine(60, "~");
 
         //   Câu 18:
         System.out.println("Câu 18: ");
-        List<AccountHistory> cau18 = new ArrayList<>();
+        List<AccountHistory> topMinBalance = new ArrayList<>();
         for (Account element : listAccount) {
             List<AccountHistory> typeIn = element.getAccountByType(AccountHistory.Type.in);
-            cau18.addAll(typeIn);
+            for (AccountHistory history : typeIn) {
+                if (history.getType() == AccountHistory.Type.transferIn) {
+                    history.fullName = element.getNameById(listAccount, history.getDestinationAccountId());
+                } else {
+                    history.fullName = element.getFullName();
+                }
+            }
+            topMinBalance.addAll(typeIn);
         }
-        Collections.sort(cau18, comparing(AccountHistory::getBalance));
-        cau18.get(0).showInfoWithoutType();
-        cau18.get(1).showInfoWithoutType();
-        cau18.get(2).showInfoWithoutType();
+        Collections.sort(topMinBalance, comparing(AccountHistory::getBalance));
+        topMinBalance = getListHistoryByNumber(topMinBalance, 3);
+        for (AccountHistory history : topMinBalance) {
+            history.showInfoWithoutType();
+        }
         printSeparatedLine(60, "~");
 
         // Câu 19:
@@ -333,16 +342,14 @@ public class MainObject_Advance {
         System.out.println(listAccount);
         printSeparatedLine(60, "~");
 
-        // Câu 20:
+        //  Câu 20:
         System.out.println("Câu 20: ");
-        List<Account> maxBalance = new ArrayList<>();
-        for (Account account : listAccount) {
-            Collections.sort(account.getHistories(), comparing(AccountHistory::getBalance).reversed());
-            Account newObject = new Account(getListHistoryByNumber(account.getHistories(), 1),
-                    account.setFullName(account.getFirstName(), account.getLastName()));
-            maxBalance.add(newObject);
+
+        List<Account> cau20 = listAccount;
+        for (Account history : cau20) {
+            Collections.sort(history.getHistories(), comparing(AccountHistory::getBalance).reversed());
         }
-        showInfoCau20(maxBalance);
+        showInfoAndTopBalance(cau20, 0);
         printSeparatedLine(60, "~");
     }
 
@@ -387,25 +394,34 @@ public class MainObject_Advance {
         showInfo(account, listAccountHistory);
     }
 
-    private static void showInfoCau20(List<Account> account) {
+    private static void showInfoAndTopBalance(List<Account> account, int numberOfTopHistories) {
         printSeparatedLine(50, "=");
+        if (numberOfTopHistories == 0){
+            System.out.println("Invalid Number Of Top History");
+            return;
+        }
         for (Account element : account) {
-            System.out.println("Họ tên: " + element.getFullName());
-            System.out.println("Giao dịch lớn nhất:");
-            if (element.getHistories() == null) {
+            if (element.getHistories().size() == 0) {
+                System.out.println("Họ tên: " + element.getFullName());
                 System.out.println("Tài khoản chưa thực hiện bất kì giao dịch nào");
                 dash();
             } else {
-                for (AccountHistory history : element.getHistories()) {
-                    System.out.println("Ngày tạo: " + formatDate(history.getCreatedDate(), "dd-MM-yyyy hh:mm:ss"));
-                    System.out.println("Số tiền: " + formatCurrency(history.getBalance()));
-                    System.out.println("Loại giao dịch: " + history.translatedType());
+                System.out.println("Họ tên: " + element.getFullName());
+                for (int i = 0; i < numberOfTopHistories; i++) {
+                    if (i < element.getHistories().size()) {
+                        System.out.println("Giao dịch lớn " + (i + 1) + ":");
+                        System.out.println("Ngày tạo: " + formatDate(element.getHistories().get(i).getCreatedDate(), "dd-MM-yyyy hh:mm:ss"));
+                        System.out.println("Số tiền: " + formatCurrency(element.getHistories().get(i).getBalance()));
+                        System.out.println("Loại giao dịch: " + element.getHistories().get(i).translatedType());
+                        if (account.indexOf(element) < account.size() - 1) {
+                            dash();
+                        } else {
+                            printSeparatedLine(50, "=");
+                        }
+                    } else {
+                        break;
+                    }
 
-                }
-                if (account.indexOf(element) < account.size() - 1) {
-                    dash();
-                } else {
-                    printSeparatedLine(50, "=");
                 }
             }
         }

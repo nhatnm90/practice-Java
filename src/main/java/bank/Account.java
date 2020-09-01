@@ -58,12 +58,9 @@ public class Account {
     }
 
     public String getFullName() {
-        return fullName;
+        return this.firstName + " " + this.lastName;
     }
 
-    public String setFullName(String firstName, String lastName) {
-        return firstName + " " + lastName;
-    }
 
     public long getCurrentBalance() {
         return currentBalance;
@@ -126,11 +123,6 @@ public class Account {
     public Account() {
         this.createdDate = Calendar.getInstance();
         this.currentBalance = INITIALIZED_BALANCE;
-    }
-
-    public Account(List<AccountHistory> history, String fullName) {
-        this.fullName = fullName;
-        this.histories = history;
     }
 
     public Account(long accountId, String firstName, String lastName, Period period) {
