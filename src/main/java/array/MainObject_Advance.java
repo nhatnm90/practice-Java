@@ -659,6 +659,47 @@ public class MainObject_Advance {
  *       Loại giao dịch: Rút tiền
  *   ================================================
  *   ...
+ *
+ *  Câu 21: Thống kê số lượng tài khoản theo loại kì hạn.
+ *  Ví dụ:
+ *  Tuần: ? (? là số lượng tài khoản đang chọn kì hạn là Tuần)
+ *  Tháng: ?
+ *  Quý: ?
+ *  Năm: ?
+ *
+ *  Câu 22: Thống kê số lượng giao dịch đã thực hiện theo loại kì hạn mà tài khoản đã chọn.
+ *  Ví dụ:
+ *  Tuần: ? (? là số lượng tài khoản giao dịch đã thực hiện có loại kì hạn là Tuần)
+ *  Tháng: ?
+ *  Quý: ?
+ *  Năm: ?
+ *
+ *  Câu 23: Thống kê số lượng giao dịch đã thực hiện theo từng loại giao dịch và theo từng loại kì hạn mà tài khoản đã chọn.
+ *  Ví dụ:
+ *  Tuần:
+ *      + Nạp tiền: ? (? là số giao dịch loại nạp tiền mà đã đc thực hiện của tài khoản mà chọn loại kì hạn là tuần)
+ *      + Rút tiền: ?
+ *      + Chuyển tiền: ?
+ *      + Nhận tiền: ?
+ *  Tháng:
+ *      +...
+ *  Quý:
+ *      +...
+ *  Năm:
+ *      +...
+ *
+ *  Câu 24: Thống kê số lượng tiền của giao dịch đã thực hiện theo từng loại giao dịch và theo từng loại kì hạn mà tài khoản đã chọn.
+ *  Ví dụ:
+ *  Tuần:
+ *      + Nạp tiền: ? (? là số tiền đã được nạp của tài khoản mà chọn loại kì hạn là tuần)
+ *      + Rút tiền: ?
+ *      + Chuyển tiền: ?
+ *      + Nhận tiền: ?
+ *  Tháng:
+ *  Quý:
+ *  Năm:
+ *
+ *  Câu 25: Tìm tài khoản đã thực hiện chuyển tiền nhiều nhất.
  */
 
 
