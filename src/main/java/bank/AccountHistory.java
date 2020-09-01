@@ -3,9 +3,9 @@ package bank;
 import utils.StringFormat;
 
 import java.text.NumberFormat;
-import java.util.Calendar;
-import java.util.Locale;
-import java.util.UUID;
+import java.util.*;
+
+import static utils.StringFormat.printSeparatedLine;
 
 public class AccountHistory {
 
@@ -29,6 +29,7 @@ public class AccountHistory {
     private Type type;
     private long sourceAccountId;
     private long destinationAccountId;
+    public String fullName;
     //</editor-fold>
 
     //<editor-fold desc="Getter Setter">
@@ -88,6 +89,8 @@ public class AccountHistory {
     //</editor-fold>
 
     //<editor-fold desc="Public functions">
+
+
     public String translatedType() {
         switch (type) {
             case in:
@@ -102,11 +105,26 @@ public class AccountHistory {
         return null;
     }
 
+
     public void showInfo() {
         System.out.println("- Ngày giao dịch: " + StringFormat.formatDate(this.createdDate, FORMAT_DATE_TEMPLATE));
         System.out.println("- Số tiền: " + StringFormat.formatCurrency(this.balance));
         System.out.println("- Loại giao dịch: " + this.translatedType());
+        System.out.println("- Người nạp: " + this.fullName);
         StringFormat.printSeparatedLine();
     }
+
+    public void showInfoWithoutType() {
+        printSeparatedLine(50, "-");
+        System.out.println("- Ngày giao dịch: " + StringFormat.formatDate(this.createdDate, FORMAT_DATE_TEMPLATE));
+        System.out.println("- Số tiền: " + StringFormat.formatCurrency(this.balance));
+        if (this.type == Type.transferIn) {
+            System.out.println("- Người nạp: " + this.fullName);
+        } else {
+            System.out.println("- Người tạo: " + this.fullName);
+        }
+    }
+
+
     //</editor-fold>
 }
