@@ -4,6 +4,7 @@ import bank.Account;
 import bank.AccountHistory;
 import bank.ProcessServices;
 import utils.StringFormat;
+import utils.Utils;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -32,37 +33,24 @@ public class MainObject_Advance {
         accountHistoriesHN.add(new AccountHistory(3000, AccountHistory.Type.transferIn, accountNH.getAccountId()));
         accountHistoriesHN.add(new AccountHistory(40, AccountHistory.Type.transferIn, accountDB.getAccountId()));
         accountHistoriesHN.add(new AccountHistory(16, AccountHistory.Type.in));
-        // Cho ngủ 3s để thấy đc thời điểm giao dịch khác nhau
-        try {
-            Thread.sleep(1 * 1000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        // Cho ngủ 1s để thấy đc thời điểm giao dịch khác nhau
+        Utils.Sleep(1);
+
         accountHistoriesHN.add(new AccountHistory(24, AccountHistory.Type.in));
         accountHistoriesHN.add(new AccountHistory(11, AccountHistory.Type.out));
-        // Cho ngủ 3s để thấy đc thời điểm giao dịch khác nhau
-        try {
-            Thread.sleep(1 * 1000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        // Cho ngủ 1s để thấy đc thời điểm giao dịch khác nhau
+        Utils.Sleep(1);
+
         accountHN.setHistories(accountHistoriesHN);
 
-        // Cho ngủ 3s để thấy đc thời điểm giao dịch khác nhau
-        try {
-            Thread.sleep(1 * 1000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        // Cho ngủ 1s để thấy đc thời điểm giao dịch khác nhau
+        Utils.Sleep(1);
 
         List<AccountHistory> accountHistoriesNH = new ArrayList<>();
         accountHistoriesNH.add(new AccountHistory(5, AccountHistory.Type.out));
-        // Cho ngủ 3s để thấy đc thời điểm giao dịch khác nhau
-        try {
-            Thread.sleep(1 * 1000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        // Cho ngủ 1s để thấy đc thời điểm giao dịch khác nhau
+        Utils.Sleep(1);
+
         accountHistoriesNH.add(new AccountHistory(69, AccountHistory.Type.transferOut, accountHN.getAccountId()));
         accountNH.setHistories(accountHistoriesNH);
 
