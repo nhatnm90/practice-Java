@@ -6,6 +6,7 @@ import eShop.Model.*;
 import utils.Utils;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 import java.util.Properties;
 import java.util.stream.Collectors;
@@ -105,16 +106,25 @@ public class InitData {
         listProduct.add(product23);
         //</editor-fold>
 
+        //<editor-fold desc="Init Order">
+        Calendar createdDate1 = Calendar.getInstance();
+        createdDate1.set(2020,Calendar.SEPTEMBER,01);
         Order order1 = new Order(Order.PaymentMethod.Cash, Order.ShippingBrand.GHN);
         Order order2 = new Order(Order.PaymentMethod.Momo, Order.ShippingBrand.GHTK);
         Order order3 = new Order(Order.PaymentMethod.CreditCard, Order.ShippingBrand.VNPost);
-        Order order4 = new Order(Order.PaymentMethod.CreditCard, Order.ShippingBrand.Nasco);
+        Calendar createdDate4 = Calendar.getInstance();
+        createdDate4.set(2020,Calendar.AUGUST,24);
+        Order order4 = new Order(Order.PaymentMethod.CreditCard, Order.ShippingBrand.Nasco, createdDate4);
         Order order5 = new Order(Order.PaymentMethod.Cash, Order.ShippingBrand.GHTK);
         Order order6 = new Order(Order.PaymentMethod.Cash, Order.ShippingBrand.Nasco);
         Order order7 = new Order(Order.PaymentMethod.CreditCard, Order.ShippingBrand.GHN);
-        Order order8 = new Order(Order.PaymentMethod.Cash, Order.ShippingBrand.Nasco);
+        Calendar createdDate8 = Calendar.getInstance();
+        createdDate8.set(2020,Calendar.JULY,24);
+        Order order8 = new Order(Order.PaymentMethod.Cash, Order.ShippingBrand.Nasco, createdDate8);
         Order order9 = new Order(Order.PaymentMethod.Momo, Order.ShippingBrand.GHTK);
-        Order order10 = new Order(Order.PaymentMethod.Cash, Order.ShippingBrand.GHN);
+        Calendar createdDate10 = Calendar.getInstance();
+        createdDate10.set(2020,Calendar.JUNE,24);
+        Order order10 = new Order(Order.PaymentMethod.Cash, Order.ShippingBrand.GHN, createdDate10);
 
         listOrder.add(order1);
         listOrder.add(order2);
@@ -126,7 +136,9 @@ public class InitData {
         listOrder.add(order8);
         listOrder.add(order9);
         listOrder.add(order10);
+        //</editor-fold>
 
+        //<editor-fold desc="Init OrderDetail">
         OrderDetail orderDetail1a = new OrderDetail(product1.getProductId(), order1.getOrderId(), 1);
         OrderDetail orderDetail1b = new OrderDetail(product11.getProductId(), order1.getOrderId(), 1);
 
@@ -198,6 +210,7 @@ public class InitData {
 
         listOrderDetail.add(orderDetail10a);
         listOrderDetail.add(orderDetail10b);
+        //</editor-fold>
 
         return new Database(listCategory, listProduct, listOrder, listOrderDetail);
     }

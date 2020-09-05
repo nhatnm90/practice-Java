@@ -31,7 +31,7 @@ public class Product {
         this.productId = UUID.randomUUID();
         this.categoryId = categoryId;
         this.onHand = 0;
-        this.unitPrice = 0;
+        this.unitPrice = unitPrice;
         this.isActive = true;
         this.order = 0;
         this.productName = productName;

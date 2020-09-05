@@ -2,7 +2,11 @@ package eShop;
 
 import eShop.Model.*;
 
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
+
+import static java.util.Comparator.comparing;
 
 public class Main {
     public static void main(String[] args){
@@ -11,6 +15,7 @@ public class Main {
         List<Product> products = database.products;
         List<Order> orders = database.orders;
         List<OrderDetail> orderDetails = database.orderDetails;
+
         System.out.println("eShop");
     }
 }
@@ -48,6 +53,9 @@ public class Main {
 *   =================================================================
 *
 *   Câu 6: In ra tên sản phẩm dài nhất trong tất cả các sản phẩm và tên danh mục cha và con của sản phẩm đó
+*   Ví dụ:
+*   [Tên sản phẩm] thuộc [Danh mục sản phẩm cha] > [Danh mục sản phẩm con]
+*   "Kem dưỡng da mặt và da khắp cơ thể 1000 ml abc...xyz" thuộc Chăm sóc da > Kem dưỡng da
 *
 *   Câu 7: Viết phương thức để cập nhật số lượng onHand của tất cả sản phẩm ban đầu là 100
 *
@@ -56,7 +64,8 @@ public class Main {
 *   Câu 9: Viết phương thức để cập nhật trạng thái (isActive) của sản phẩm. Với mới danh mục sản phẩm, cập nhật isActive của sản phẩm thấp nhất thành FALSE
 *
 *   Câu 10: Đánh thứ tự của sản phẩm trong từng danh mục sản phẩm theo tiêu chí, giá càng cao order càng nhỏ
-*   Lưu ý: chỉ đánh thứ tự trong từng danh mục con. Danh mục Trang điểm có 10 sản phẩm thì sản phẩm giá cao nhất order = 0, ở các danh mục khác cũng tương tự
+*   Lưu ý: chỉ đánh thứ tự trong từng danh mục con. Danh mục sản phẩm Trang điểm có 10 sản phẩm thì sản phẩm giá cao nhất order = 0,
+*   ở các danh mục khác cũng tương tự, sản phẩm có giá càng cao nhất order = 0
 *
 *   Câu 11: Với mỗi danh mục sản phẩm con (danh mục chứa sản phẩm), in ra tên sản phẩm có giá cao nhất
 *   Ví dụ:
@@ -129,5 +138,34 @@ public class Main {
 *   |     |____ Son
 *   |
 *   |____ Dầu gội đầu
+*
+*   Câu 16: Viết phương thức tính ra số lượng đơn hàng được giao bởi 1 shippingBrand truyền vào
+*   Ví dụ: getNumberOfOrderByShippingBrand(ShippingBrand shippingBrand) { return 0; }
+*
+*   Câu 17: In ra tên ShippingBrand có số lượng đơn hàng đã được hoàn thành (Order.status = Received) nhiều nhất
+*
+*   Câu 18: In ra danh sách đơn hàng tranh toán bằng tiền mặt (Order.paymentMethod = Cash)
+*
+*   Câu 19: Do trang thái của mỗi đơn hàng lúc tạo ra luôn luôn là waitingForPayment (constructor của Order luôn set Order.status = waitingForPayment)
+*   Nên sẽ không hợp lý nếu những đơn hàng được tạo ra với phương thức thanh toán điện tử (Momo, Grab, Credit Card...).
+*   Hãy cập nhật lại trạng thái đơn hàng (Order.status) của những đơn hàng đó qua trạng thái confirmed
+*
+*   Câu 20: Những đơn hàng có trạng thái là đang giao hàng (Order.status = shipping) nhưng ngày tạo quá 15 ngày
+*   so với ngày hiện tại thì được coi là đơn hàng giao quá chậm và bị hủy.
+*   Hãy cập nhật lại trạng thái là hủy (Order.status = canceled) cho những đơn hàng đó
+*
+*   Câu 21: Tìm đơn vị vận chuyển mà có số lượng đơn hàng bị hủy nhiều nhất
+*
+*   Câu 22: Từ danh sách sản phẩm (Product) và danh sách chi tiết đơn hàng (OrderDetail),
+*   hãy cập nhật giá (Product.unitPrice) của sản phẩm tương ứng vào chi tiết đơn hàng tương ứng (OrderDetail.unitPrice)
+*
+*   Câu 23: Trong chi tiết đơn hàng (OrderDetail) tính tổng giá tiền của từng record chi tiết đơn hàng (OrderDetail.totalPrice) dựa vào giá và số lượng
+*   totalPrice = unitPrice * quantity
+*
+*   Câu 24: Trong danh sách đơn hàng (Order) hãy cập nhật danh sách chi tiết đơn hàng (Order.orderDetails) bằng cách tìm trong danh sách chi tiết đơn hàng
+*   những chi tiết đơn hàng tương ứng (OrderDetail.orderId)
+*
+*   Câu 25: Tính giá trị đơn hàng trong danh sách đơn hàng (Order.totalPrice)
+*   bằng cách tính tổng giá trị của từng chi tiết đơn hàng (OrderDetail) thuộc về đơn hàng đó
 *
 * */

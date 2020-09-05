@@ -112,6 +112,16 @@ public class Order {
         this.paymentMethod = paymentMethod;
         this.shippingBrand = shippingBrand;
     }
+
+    public Order(PaymentMethod paymentMethod, ShippingBrand shippingBrand, Calendar createdDate) {
+        this.createdDate = Calendar.getInstance();
+        this.orderId = UUID.randomUUID();
+        this.status = Status.waitingForPayment;
+        this.orderDetails = new ArrayList<>();
+        this.paymentMethod = paymentMethod;
+        this.shippingBrand = shippingBrand;
+        this.createdDate = createdDate;
+    }
     //</editor-fold>
 
     //<editor-fold desc="Private functions">
