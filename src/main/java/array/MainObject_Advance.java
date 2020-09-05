@@ -344,13 +344,161 @@ public class MainObject_Advance {
 
         //  Câu 20:
         System.out.println("Câu 20: ");
-
-        List<Account> cau20 = listAccount;
-        for (Account history : cau20) {
-            Collections.sort(history.getHistories(), comparing(AccountHistory::getBalance).reversed());
+        for (Account account : listAccount) {
+            List<AccountHistory> accountHistoryList = account.getHistories();
+            Collections.sort(account.getHistories(), comparing(AccountHistory::getBalance).reversed());
+            System.out.println("Họ tên: " + account.getFullName());
+            if (accountHistoryList.size() > 0) {
+                accountHistoryList.get(0).showInfo();
+            } else {
+                System.out.println("Tài khoản chưa thực hiện bất kì giao dịch nào");
+            }
         }
-        showInfoAndTopBalance(cau20, 0);
+        //======================================================================
+        for (Account account : listAccount) {
+            List<AccountHistory> accountHistoryList = account.getHistories();
+            Collections.sort(account.getHistories(), comparing(AccountHistory::getBalance).reversed());
+            account.getHistories().get(0).showInfo();
+            if (account.getHistories().size() == 0) {
+                System.out.println("Họ tên: " + account.getFullName());
+                System.out.println("Tài khoản chưa thực hiện bất kì giao dịch nào");
+            } else {
+                System.out.println("Họ tên: " + account.getFullName());
+                System.out.println("Giao dịch lớn nhất:");
+                System.out.println("Ngày tạo: " + formatDate(account.getHistories().get(0).getCreatedDate(), "dd-MM-yyyy hh:mm:ss"));
+                System.out.println("Số tiền: " + formatCurrency(account.getHistories().get(0).getBalance()));
+                System.out.println("Loại giao dịch: " + account.getHistories().get(0).translatedType());
+            }
+            if (listAccount.indexOf(account) == listAccount.size() - 1) {
+                printSeparatedLine(50, "=");
+            } else {
+                dash();
+            }
+        }
         printSeparatedLine(60, "~");
+
+
+        //  Câu 21:
+        System.out.println("Câu 21: ");
+        List<Account> periodByWeek = new ArrayList<>();
+        List<Account> periodByMonth = new ArrayList<>();
+        List<Account> periodByQuarter = new ArrayList<>();
+        List<Account> periodByYear = new ArrayList<>();
+        for (Account account : listAccount) {
+            switch (account.getPeriod()) {
+                case Week:
+                    periodByWeek.add(account);
+                    break;
+                case Month:
+                    periodByMonth.add(account);
+                    break;
+                case Quarter:
+                    periodByQuarter.add(account);
+                    break;
+                case Year:
+                    periodByYear.add(account);
+                    break;
+            }
+        }
+        System.out.println("Thống kê số lượng tài khoản theo loại kì hạn: ");
+        System.out.println("Tuần: \t" + periodByWeek.size() + " tài khoản");
+        System.out.println("Tháng: \t" + periodByMonth.size() + " tài khoản");
+        System.out.println("Quý: \t" + periodByQuarter.size() + " tài khoản");
+        System.out.println("Năm: \t" + periodByYear.size() + " tài khoản");
+        printSeparatedLine(60, "~");
+
+        // Câu 22:
+        System.out.println("Câu 22: ");
+        int noOfAccByWeek = 0;
+        int noOfAccByMonth = 0;
+        int noOfAccByQuarter = 0;
+        int noOfAccByYear = 0;
+
+        for (Account account : listAccount) {
+            if (account.getHistories().size() != 0) {
+                switch (account.getPeriod()) {
+                    case Week:
+                        noOfAccByWeek++;
+                        break;
+                    case Month:
+                        noOfAccByMonth++;
+                        break;
+                    case Quarter:
+                        noOfAccByQuarter++;
+                        break;
+                    case Year:
+                        noOfAccByYear++;
+                        break;
+                }
+            }
+        }
+        System.out.println("Thống kê số lượng giao dịch đã thực hiện theo loại kì hạn: ");
+        System.out.println("Tuần: \t" + noOfAccByWeek + " tài khoản");
+        System.out.println("Tháng: \t" + noOfAccByMonth + " tài khoản");
+        System.out.println("Quý: \t" + noOfAccByQuarter + " tài khoản");
+        System.out.println("Năm: \t" + noOfAccByYear + " tài khoản");
+        printSeparatedLine(60, "~");
+
+        //  Câu 23:
+        System.out.println("Câu 23:  ");
+        for (Account account : periodByWeek) {
+            System.out.println("Thống kê số lượng giao dịch đã thực hiện theo từng loại giao dịch có kì hạn Tuần: ");
+            account.summarizeNumberOfTransaction(periodByWeek);
+            System.out.println("Thống kê số lượng giao dịch đã thực hiện theo từng loại giao dịch có kì hạn Tháng: ");
+            account.summarizeNumberOfTransaction(periodByMonth);
+            System.out.println("Thống kê số lượng giao dịch đã thực hiện theo từng loại giao dịch có kì hạn Quý: ");
+            account.summarizeNumberOfTransaction(periodByQuarter);
+            System.out.println("Thống kê số lượng giao dịch đã thực hiện theo từng loại giao dịch có kì hạn Năm: ");
+            account.summarizeNumberOfTransaction(periodByYear);
+            break;
+        }
+        printSeparatedLine(60, "~");
+
+        //  Câu 24:
+        System.out.println("Câu 24:");
+        for (Account account : periodByWeek) {
+            System.out.println("Thống kê số lượng tiền của giao dịch đã thực hiện theo từng loại giao dịch có kì hạn Tuần: ");
+            account.summarizeNumberOfTransactionByBalance(periodByWeek);
+            System.out.println("Thống kê số lượng tiền của giao dịch đã thực hiện theo từng loại giao dịch có kì hạn Tháng: ");
+            account.summarizeNumberOfTransactionByBalance(periodByMonth);
+            System.out.println("Thống kê số lượng tiền của giao dịch đã thực hiện theo từng loại giao dịch có kì hạn Quý: ");
+            account.summarizeNumberOfTransactionByBalance(periodByQuarter);
+            System.out.println("Thống kê số lượng tiền của giao dịch đã thực hiện theo từng loại giao dịch có kì hạn Năm: ");
+            account.summarizeNumberOfTransactionByBalance(periodByYear);
+            break;
+        }
+        printSeparatedLine(60, "~");
+
+        //  Câu 25:
+        System.out.println("Câu 25:");
+        List<Account> listTransferOutBalance = new ArrayList<>();
+//        List<AccountHistory> listTransferOut = new ArrayList<>();
+        for (Account account : listAccount) {
+            List<AccountHistory> listTransferOut = account.getAccountByType(AccountHistory.Type.transferOut);
+            long totalBalance = 0;
+            for (AccountHistory history : listTransferOut) {
+                totalBalance += history.getBalance();
+                account.setTotalBalance(totalBalance);
+
+            }
+            listTransferOutBalance.add(account);
+        }
+        Collections.sort(listTransferOutBalance, comparing(Account::getTotalBalance).reversed());
+        listTransferOutBalance.get(0).showInfo();
+        System.out.println(listTransferOutBalance.get(0).getTotalBalance());
+
+
+        Account accountTemp = null;
+        long totalBalanceTransferOutTemp = 0;
+        for (Account account : listAccount) {
+            long totalBalanceTransferOut = account.getTotalBalanceByType(AccountHistory.Type.transferOut);
+            if (totalBalanceTransferOut > totalBalanceTransferOutTemp) {
+                accountTemp = account;
+                totalBalanceTransferOutTemp = totalBalanceTransferOut;
+            }
+        }
+        accountTemp.showInfo();
+        System.out.println(totalBalanceTransferOutTemp);
     }
 
 
@@ -388,6 +536,45 @@ public class MainObject_Advance {
         System.out.println("Loại kỳ hạn: " + account.getPeriod());
     }
 
+    private static void showInfoWithTop1Balance(List<Account> account) {
+        printSeparatedLine(50, "=");
+        for (Account element : account) {
+            if (element.getHistories().size() == 0) {
+                System.out.println("Họ tên: " + element.getFullName());
+                System.out.println("Tài khoản chưa thực hiện bất kì giao dịch nào");
+
+            } else {
+                System.out.println("Họ tên: " + element.getFullName());
+                System.out.println("Giao dịch lớn nhất:");
+                System.out.println("Ngày tạo: " + formatDate(element.getHistories().get(0).getCreatedDate(), "dd-MM-yyyy hh:mm:ss"));
+                System.out.println("Số tiền: " + formatCurrency(element.getHistories().get(0).getBalance()));
+                System.out.println("Loại giao dịch: " + element.getHistories().get(0).translatedType());
+            }
+            if (account.indexOf(element) == account.size() - 1) {
+                printSeparatedLine(50, "=");
+            } else {
+                dash();
+            }
+        }
+    }
+
+    public static void showInfoWithHighestBalance(List<AccountHistory> history) {
+        for (AccountHistory element : history) {
+            if (history.size() == 0) {
+                System.out.println("Họ tên: " + element.fullName);
+                System.out.println("Tài khoản chưa thực hiện bất kì giao dịch nào");
+            } else {
+                System.out.println("Họ Tên: " + element.fullName);
+                System.out.println("Giao dịch lớn nhất:: ");
+                System.out.println("- Ngày tạo: " + formatDate(element.getCreatedDate()));
+                System.out.println("- Số tiền: " + formatCurrency(element.getBalance()));
+                System.out.println("- Loại giao dịch: " + element.translatedType());
+                StringFormat.printSeparatedLine();
+            }
+        }
+    }
+
+
     private static void showInfo(Account account, AccountHistory.Type type) {
         List<AccountHistory> listAccountHistory = account.getHistories().stream().filter(transferIn ->
                 transferIn.getType() == type).collect(Collectors.toList());
@@ -396,7 +583,7 @@ public class MainObject_Advance {
 
     private static void showInfoAndTopBalance(List<Account> account, int numberOfTopHistories) {
         printSeparatedLine(50, "=");
-        if (numberOfTopHistories == 0){
+        if (numberOfTopHistories == 0) {
             System.out.println("Invalid Number Of Top History");
             return;
         }
