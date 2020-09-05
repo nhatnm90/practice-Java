@@ -53,6 +53,29 @@ public class Category {
     //</editor-fold>
 
     //<editor-fold desc="Public functions">
+    public int countCharacter(){
+        return this.categoryName.length();
+    }
+
+    public String getCategoryName() {
+        return categoryName;
+    }
+
+    public UUID getParentCategoryId() {
+        return parentCategoryId;
+    }
+
+    public boolean isActive() {
+        return isActive;
+    }
+
+    public void setActive(boolean active) {
+        isActive = active;
+    }
+
+    public void setOrder(int order) {
+        this.order = order;
+    }
 
     //</editor-fold>
 }

@@ -2,6 +2,10 @@ package eShop;
 
 import eShop.Model.*;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import static java.util.Comparator.comparing;
+
 import java.util.List;
 
 public class Main {
@@ -12,8 +16,59 @@ public class Main {
         List<Order> orders = database.orders;
         List<OrderDetail> orderDetails = database.orderDetails;
         System.out.println("eShop");
+
+
+        // C1:
+        Collections.sort(products, comparing(Product::getUnitPrice).reversed());
+
+        //C2:
+        for (Category category : categories){
+            category.setActive(true);
+        }
+
+        //C3:
+        Collections.sort(categories, comparing(Category::countCharacter));
+        for (int i = 0; i < categories.size(); i++){
+            categories.get(i).setOrder(i);
+        }
+
+
+        //C4:
+        List<Category> parentList = new ArrayList<>();
+        for (Category category : categories){
+            if (category.getParentCategoryId() == null){
+                parentList.add(category);
+            }
+
+        }
+        for (Category parentCategory : parentList){
+            boolean isParent = false;
+            for (Category category : categories ){
+//                if (parentCategory.getCategoryId() == category.getParentCategoryId()){
+//                    isParent = true;
+//                    break;
+//                }
+                isParent = categories.stream().anyMatch(
+                        x -> parentCategory.getCategoryId() == x.getParentCategoryId()
+                );
+            }
+            if (isParent == false) {
+                parentCategory.setActive(false);
+            }
+            System.out.println(parentCategory.isActive());
+        }
     }
+
 }
+
+
+
+
+
+
+
+
+
 
 /*
 *
