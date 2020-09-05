@@ -45,6 +45,8 @@ public class AccountHistory {
         return balance;
     }
 
+
+
     public Type getType() {
         return type;
     }
@@ -90,7 +92,6 @@ public class AccountHistory {
 
     //<editor-fold desc="Public functions">
 
-
     public String translatedType() {
         switch (type) {
             case in:
@@ -106,6 +107,8 @@ public class AccountHistory {
     }
 
 
+
+
     public void showInfo() {
         System.out.println("- Ngày giao dịch: " + StringFormat.formatDate(this.createdDate, FORMAT_DATE_TEMPLATE));
         System.out.println("- Số tiền: " + StringFormat.formatCurrency(this.balance));
@@ -113,6 +116,16 @@ public class AccountHistory {
         System.out.println("- Người nạp: " + this.fullName);
         StringFormat.printSeparatedLine();
     }
+
+    public void showInfoWithAccountName() {
+        System.out.println("- Họ tên: " + this.fullName);
+        System.out.println("- Ngày giao dịch: " + StringFormat.formatDate(this.createdDate, FORMAT_DATE_TEMPLATE));
+        System.out.println("- Số tiền: " + StringFormat.formatCurrency(this.balance));
+        System.out.println("- Loại giao dịch: " + this.translatedType());
+        System.out.println("- Người nạp: " + this.fullName);
+        StringFormat.printSeparatedLine();
+    }
+
 
     public void showInfoWithoutType() {
         printSeparatedLine(50, "-");

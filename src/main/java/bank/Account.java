@@ -6,6 +6,7 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 import static java.util.Comparator.comparing;
+import static utils.StringFormat.formatCurrency;
 
 public class Account {
 
@@ -31,6 +32,7 @@ public class Account {
     private Calendar endDate;
     private List<AccountHistory> histories;
     private Period period;
+    private long totalBalance;
     //</editor-fold>
 
     //<editor-fold desc="Getter Setter">
@@ -61,6 +63,13 @@ public class Account {
         return this.firstName + " " + this.lastName;
     }
 
+    public long getTotalBalance() {
+        return totalBalance;
+    }
+
+    public void setTotalBalance(long totalBalance) {
+        this.totalBalance = totalBalance;
+    }
 
     public long getCurrentBalance() {
         return currentBalance;
@@ -244,20 +253,105 @@ public class Account {
     //</editor-fold>
 
     //<editor-fold desc="Public functions">
+    public List<Account> summarizeByPeriod (List<Account> listAccount, Period period){
+        List<Account> accountsByPeriod = listAccount.stream().filter(account -> account.getPeriod() == period)
+                .collect(Collectors.toList());
+        return accountsByPeriod;
+    }
 
 
+    public int countElementWithCondition(List<Account> listAccount){
+        int countNumber = 0;
+        for (Account account : listAccount)
+        if (account.getHistories().size() != 0){
+            countNumber++;
+        }
+        return countNumber;
+    }
+
+    public void summarizeNumberOfTransactionByBalance(List<Account> listAccount) {
+        int withTypeIn = 0;
+        int withTypeOut = 0;
+        int withTypeTransferIn = 0;
+        int withTypeTransferOut = 0;
+        for (Account account : listAccount) {
+            for (AccountHistory history : account.getHistories()) {
+                switch (history.getType()) {
+                    case in:
+                        withTypeIn += history.getBalance();
+                        break;
+                    case out:
+                        withTypeOut += history.getBalance();
+                        break;
+                    case transferIn:
+                        withTypeTransferIn += history.getBalance();
+                        break;
+                    case transferOut:
+                        withTypeTransferOut += history.getBalance();
+                        break;
+                }
+
+            }
+
+        }
+        System.out.println("Nạp tiền: \t\t"   + formatCurrency(withTypeIn) );
+        System.out.println("Rút tiền: \t\t" + formatCurrency(withTypeOut) );
+        System.out.println("Chuyển tiền: \t" + formatCurrency(withTypeTransferIn) );
+        System.out.println("Nhận tiền: \t\t" + formatCurrency(withTypeTransferOut) );
+
+    }
+
+    public void summarizeNumberOfTransaction(List<Account> listAccount) {
+        int withTypeIn = 0;
+        int withTypeOut = 0;
+        int withTypeTransferIn = 0;
+        int withTypeTransferOut = 0;
+        for (Account account : listAccount) {
+            for (AccountHistory history : account.getHistories()) {
+                switch (history.getType()) {
+                    case in:
+                        withTypeIn++;
+                        break;
+                    case out:
+                        withTypeOut++;
+                        break;
+                    case transferIn:
+                        withTypeTransferIn++;
+                        break;
+                    case transferOut:
+                        withTypeTransferOut++;
+                        break;
+                }
+            }
+
+        }
+        System.out.println("Nạp tiền: \t\t" + withTypeIn + " giao dịch");
+        System.out.println("Rút tiền: \t\t" + withTypeOut + " giao dịch");
+        System.out.println("Chuyển tiền: \t" + withTypeTransferIn + " giao dịch");
+        System.out.println("Nhận tiền: \t\t" + withTypeTransferOut + " giao dịch");
+    }
 
     public String getNameById (List<Account> listAccount, long accountId){
        Account account =  listAccount.stream().filter(id -> id.getAccountId() == accountId)
                .findAny().orElse(null);
-       String fullName = account.getFirstName() + " " + account.getLastName();
+       String fullName = account.getFullName();
         return fullName;
     }
 
     public List<AccountHistory> getAccountByType (AccountHistory.Type type){
-        List<AccountHistory> listAccountHistory = this.getHistories().stream().filter(transferIn ->
-                transferIn.getType() == type).collect(Collectors.toList());
+        List<AccountHistory> listAccountHistory = this.getHistories().stream().filter(transferType ->
+                transferType.getType() == type).collect(Collectors.toList());
         return listAccountHistory;
+    }
+
+    public long getTotalBalanceByType (AccountHistory.Type type) {
+        long totalBalance = 0;
+        for (AccountHistory history : getHistories()) {
+            if (history.getType() == type) {
+                totalBalance += history.getBalance();
+            }
+        }
+        return totalBalance;
     }
 
     public static void dash(){
