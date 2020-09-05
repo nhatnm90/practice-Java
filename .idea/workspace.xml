@@ -20,14 +20,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="931e8be6-453d-4ef9-96c5-b3e75cbc0ef4" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/eShop/InitData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/eShop/InitData.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/eShop/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/eShop/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/eShop/Model/Order.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/eShop/Model/Order.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/eShop/Model/Product.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/eShop/Model/Product.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/bank/Account$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/bank/Account$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/bank/Account$Period.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/bank/Account$Period.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/bank/Account.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/bank/Account.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/eShop/Model/Category.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/eShop/Model/Category.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
