@@ -57,6 +57,10 @@ public class Category {
         return this.categoryName.length();
     }
 
+    public int countCharacter(String categoryName){
+        return categoryName.length();
+    }
+
     public String getCategoryName() {
         return categoryName;
     }

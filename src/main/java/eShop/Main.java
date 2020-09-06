@@ -5,10 +5,8 @@ import eShop.Model.*;
 import java.util.ArrayList;
 import java.util.Collections;
 import static java.util.Comparator.comparing;
-
 import java.util.List;
 
-import static java.util.Comparator.comparing;
 
 public class Main {
     public static void main(String[] args){
@@ -23,20 +21,37 @@ public class Main {
 
         // C1:
         Collections.sort(products, comparing(Product::getUnitPrice).reversed());
+        // 1 cách khác viết gọn hơn
+        // ListSort.sort(comparing(ClassSort::PropertySort));
+        // ListSort: products
+        // ClassSort: Product
+        // PropertySort: getUnitPrice
+        // products.sort(comparing(Product::getUnitPrice).reversed());
 
-        //C2:
+
+        // C2:
         for (Category category : categories){
             category.setActive(true);
         }
 
-        //C3:
+        // C3:
         Collections.sort(categories, comparing(Category::countCharacter));
+        // Cách viết này có thể truyền parameter vào trong function nếu mình thực sự cần dùng đến parameter
+        // Cách này kiểu viết lambda hay còn gọi là arrow function
+        // Body của lambda:
+        // Ví du:
+        // object -> object.functionOfClass(parameters)
+        // object: category
+        // functionOfClass: countCharacter() -> the object ONLY call the function of the CLASS that this object was generated from
+        // parameters: category.getCategoryName()
+        // category -> category.countCharacter(category.getCategoryName())
+        // Collections.sort(categories, comparing(category -> category.countCharacter(category.getCategoryName())));
         for (int i = 0; i < categories.size(); i++){
             categories.get(i).setOrder(i);
         }
 
 
-        //C4:
+        // C4:
         List<Category> parentList = new ArrayList<>();
         for (Category category : categories){
             if (category.getParentCategoryId() == null){
@@ -55,6 +70,9 @@ public class Main {
                         x -> parentCategory.getCategoryId() == x.getParentCategoryId()
                 );
             }
+            // Cách viết khác, gọn hơn, không bắt buộc phải theo nhưng nên tập để code gọn hơn và
+            // thường đa số mọi người đều dùng nên mình cứ dùng từ từ cho quen à e
+            //if (!isParent)
             if (isParent == false) {
                 parentCategory.setActive(false);
             }
@@ -212,13 +230,41 @@ public class Main {
 *   Câu 22: Từ danh sách sản phẩm (Product) và danh sách chi tiết đơn hàng (OrderDetail),
 *   hãy cập nhật giá (Product.unitPrice) của sản phẩm tương ứng vào chi tiết đơn hàng tương ứng (OrderDetail.unitPrice)
 *
-*   Câu 23: Trong chi tiết đơn hàng (OrderDetail) tính tổng giá tiền của từng record chi tiết đơn hàng (OrderDetail.totalPrice) dựa vào giá và số lượng
+*   Câu 23: Trong chi tiết đơn hàng (OrderDetail) tính tổng giá tiền của từng chi tiết đơn hàng (OrderDetail.totalPrice) dựa vào giá và số lượng
 *   totalPrice = unitPrice * quantity
 *
 *   Câu 24: Trong danh sách đơn hàng (Order) hãy cập nhật danh sách chi tiết đơn hàng (Order.orderDetails) bằng cách tìm trong danh sách chi tiết đơn hàng
-*   những chi tiết đơn hàng tương ứng (OrderDetail.orderId)
+*   những chi tiết đơn hàng tương ứng (OrderDetail.orderId).
 *
 *   Câu 25: Tính giá trị đơn hàng trong danh sách đơn hàng (Order.totalPrice)
 *   bằng cách tính tổng giá trị của từng chi tiết đơn hàng (OrderDetail) thuộc về đơn hàng đó
+*
+*   Câu 26: Dựa vào danh sách chi tiết đơn hàng (OrderDetail) hãy tìm số lượng sản phẩm đã bán được của mỗi mặt hàng và
+*   cập nhật lại vào số lượng đã bán trong sản phẩm (Product.soldItem)
+*   Tính tổng tất cả sản phẩm đã bán và không bị trả
+*
+*   Câu 27: In ra top 10 sản phẩm được bán nhiều nhất và sắp xếp theo thứ tự số lượng bán giảm dần (format tùy vào mình, miễn sao rõ ràng đủ thông tin là đc e)
+*
+*   Câu 28: Đánh dấu sản phẩm là yêu thích (Product.isFavorite) bằng cách dựa vào số lượng sản phẩm đã bán được,
+*   nếu sản phẩm đó bán trên 5 được tính là yêu thích (Product.soldItem > 5) -> yêu thích
+*
+*   Câu 29: Thêm 1 property/state mới cho sản phẩm để tính giá nhập của mỗi sản phẩm (Product.importUnitPrice)
+*   và tính giá trị của giá nhập bằng công thức sau:
+*       Điều kiện       |       Công thức tính
+*   ----------------------------------------------
+*       < 50 000        |           80%
+*       < 200 000       |           85%
+*       < 500 000       |           90 %
+*       < 1 000 000     |           95%
+*   Giá bán của sản phẩm < 50 000 -> giá nhập = 80% giá bán (unitPrice < 50000 -> importUnitPrice = 80% of unitPrice)
+*
+*   Câu 30: Tính lợi nhuận thu được từ mỗi sản phẩm bán ra theo cách lấy chênh lệch của giá nhập và giá bán nhân với số lượng đã bán
+*   Có thế thêm property/state mới hoặc chỉ cần tính toán và in ra màn hình là được
+*
+*   Câu 31: Thay đổi công thức tính sản phẩm yêu thích (Product.isFavorite) như sau:
+*   Sản phẩm được coi là yêu thích nếu thỏa 1 trong 2 điều kiện sau
+*   Số lượng bán đc > 8 hoặc doanh thu từ số sản phẩm đã bán > 200 000 đ
+*
+*   Câu 32:  In ra danh sách TOP 5 sản phẩm bán ế nhất, tiêu chí ế đc tính bằng số sản phẩm đc bán ít nhất (Product.soldItem)
 *
 * */

@@ -19,6 +19,7 @@ public class Product {
     private boolean isActive;
     private int order;
     private long soldItem;
+    private double importUnitPrice;
     //</editor-fold>
 
     //<editor-fold desc="Getter Setter">

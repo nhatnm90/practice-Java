@@ -1,19 +1,10 @@
 package eShop;
 
-import bank.Account;
-import bank.AccountHistory;
 import eShop.Model.*;
-import utils.Utils;
 
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
-import java.util.Properties;
-import java.util.stream.Collectors;
-
-import static array.MainInteger.dash;
-import static java.util.Comparator.comparing;
-import static utils.StringFormat.*;
 
 public class InitData {
     public static Database run() {
