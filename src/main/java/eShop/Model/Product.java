@@ -118,7 +118,9 @@ public class Product {
     //</editor-fold>
 
     //<editor-fold desc="Public functions">
-
+    public int countCharacter(){
+        return this.productName.length();
+    }
     //</editor-fold>
 }
 
