@@ -4,6 +4,8 @@ package eShop.Model;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
+import static utils.StringFormat.formatCurrency;
+
 public class Product {
 
     //<editor-fold desc="Constant">
@@ -111,6 +113,13 @@ public class Product {
     public void setActive(boolean active) {
         isActive = active;
     }
+
+    public void setInitOnHand(){
+        this.onHand = 100;
+    }
+    public void updateProductStatus(){
+        this.isActive = false;
+    }
     //</editor-fold>
 
     //<editor-fold desc="Private functions">
@@ -121,6 +130,17 @@ public class Product {
     public int countCharacter(){
         return this.productName.length();
     }
+
+    public void updateProductNameToLowerCase(){
+        this.productName = getProductName().toLowerCase();
+    }
+    public void showInfo (){
+        System.out.println("Giá: " + formatCurrency(this.unitPrice, "vn", "VN"));
+        System.out.println("Name: " + this.productName);
+        System.out.println("Order: " + this.order);
+    }
+
+
     //</editor-fold>
 }
 

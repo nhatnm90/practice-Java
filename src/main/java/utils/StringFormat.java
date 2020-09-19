@@ -48,11 +48,11 @@ public class StringFormat {
         return format(amount, new Locale("en", "US"));
     }
 
-    public static String formatCurrency(long amount, String language, String country) {
+    public static String formatCurrency(double amount, String language, String country) {
         return format(amount, new Locale(language, country));
     }
 
-    private static String format(long amount, Locale local) {
+    private static String format(double amount, Locale local) {
         return NumberFormat.getCurrencyInstance(local).format(amount);
     }
 }
