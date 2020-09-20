@@ -12,6 +12,7 @@ import static utils.StringFormat.printSeparatedLine;
 
 import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 
 public class Main {
@@ -129,6 +130,15 @@ public class Main {
             }
         }
 
+        // Nếu mình đã tìm đc product có tên dài nhất thì sau đó mình lấy luôn category của product đó xài luôn
+        // mình không cần loop qua cái list category làm gì hết e ha
+        Product productWithLongestName = products.get(0);
+        Category cate = getCategoryById(categories, productWithLongestName.getCategoryId());
+        Category parentCate = getCategoryById(categories, cate.getParentCategoryId());
+        System.out.println(productWithLongestName.getProductName() + " thuộc " +
+                parentCate.getCategoryName() + " > " +
+                cate.getCategoryName());
+
         //C7:
         for (Product product : products) {
             product.setInitOnHand();
@@ -142,6 +152,9 @@ public class Main {
         // C9:
         products.sort(comparing(Product::getUnitPrice).reversed());
         products.get(0).updateProductStatus();
+
+        // yêu cầu của câu 9 là chỉ cập nhật trạng thái isActive của sản phẩm thấp nhất trong MỖI danh mục sản phẩm (category)
+        // theo cách trình bày trên là mình đang chỉ cập nhật giá thấp nhất của hệ thống chứ không phải theo mỗi danh mục sản phẩm à e
 
         // C10:
         System.out.println("Câu 10: ");
@@ -158,6 +171,25 @@ public class Main {
                         product.showInfo();
                     }
                 }
+            }
+        }
+
+        // ở câu này đáp án cuối cùng sẽ đúng à e, nhưng có vẻ cách làm này nó bị cồng kềnh quá á,
+        // vì lúc nào mình cũng phải loop qua tất cả sản phẩm cũng mỗi danh mục để tìm sản phẩm đó hết
+        // thay vì vậy ở mỗi danh mục sản phẩm, mình chỉ nên lấy sản phẩm của danh mục đó ra thôi hen
+
+        System.out.println("Câu 10a: ");
+        // mình chỉ lấy những category nào chứa sản phẩm thôi, category cha thì khỏi cần loop qua hen e
+        // lúc này mình sẽ ko cần tốn 1 cái if để check cái category đó có phải là cate con hay ko
+        for (Category category10a : childrenList) {
+            dash();
+            System.out.println("Category: " + category10a.getCategoryName());
+            // mình chỉ lấy những product thuộc category đang loop qua thôi, lúc này sẽ hạn chế việc lúc nào cũng chạy qua hết danh sách product
+            List<Product> sortedProductsByCate = getListSortByPriceProductByCategory(products, category10a.getCategoryId());
+            // thay vì dùng for kiểu kia thì mình xài for thuần sẽ tận dụng đc biến index hen e
+            for (int i = 0; i < sortedProductsByCate.size(); i++) {
+                sortedProductsByCate.get(i).setOrder(i);
+                sortedProductsByCate.get(i).showInfo();
             }
         }
 
@@ -181,10 +213,16 @@ public class Main {
             printSeparatedLine(50, "=");
         }
 
+        // câu này mình sửa lại tương tự câu trên hen e, theo cách là cứ tìm danh mục sản phẩm mà chỉ chứa sản phẩm
+        // tìm ta sản phẩm của danh mục đó
+        // sort sản phẩm theo giá
+        // lấy sản phẩm giá cao nhất và in ra thôi hen
+
         // C12:
         System.out.println("Câu 12");
         for (Category category12 : childrenList) {
             int number = 0;
+            // chỗ này là lúc nào mình cũng phải loop qua hết cái danh sách nè e, hơi bị hao performance ở đây nè
             for (Product product : products) {
                 if (category12.getCategoryId() == product.getCategoryId()) {
                     number++;
@@ -193,6 +231,30 @@ public class Main {
             System.out.println("Danh mục sản phẩm: " + category12.getCategoryName());
             System.out.println("Số lượng sản phẩm: " + number);
         }
+
+        System.out.println("Câu 12a");
+        for (Category category12a : childrenList) {
+            List<Product> listProductByCate = getListProductByCategory(products, category12a.getCategoryId());
+            System.out.println("Danh mục sản phẩm: " + category12a.getCategoryName());
+            System.out.println("Số lượng sản phẩm: " + listProductByCate.size());
+        }
+    }
+
+    private static Category getCategoryById(List<Category> categories, UUID categoryId) {
+        return categories.stream().filter(cate -> cate.getCategoryId() == categoryId)
+                .findAny().orElse(null);
+    }
+
+    private static List<Product> getListProductByCategory(List<Product> products, UUID categoryId) {
+        return products.stream().filter(cate -> cate.getCategoryId() == categoryId)
+                .collect(Collectors.toList());
+    }
+
+    private static List<Product> getListSortByPriceProductByCategory(List<Product> products, UUID categoryId) {
+        List<Product> productsByCate = products.stream().filter(product -> product.getCategoryId().equals(categoryId))
+                .collect(Collectors.toList());
+        productsByCate.sort(comparing(Product::getUnitPrice).reversed());
+        return productsByCate;
     }
 
 
