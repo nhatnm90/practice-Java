@@ -95,104 +95,124 @@ public class Main {
                 childrenList.add(category);
             }
         }
-        for (Category parentCategory : parentList) {
-            showCategoryInfo(parentCategory);
-            int numOfChildren = 0;
-            for (Category childrenCategory : childrenList) {
-                if (childrenCategory.getParentCategoryId() == parentCategory.getCategoryId()) {
-                    numOfChildren++;
-                }
-            }
-            if (numOfChildren > 0) {
-                System.out.println("Số danh mục con: " + numOfChildren);
-            } else {
-                System.out.println("Không tồn tại danh mục con");
-            }
-            dash();
-            for (Category category : categories) {
-                if (parentCategory.getCategoryId() == category.getParentCategoryId()) {
-                    showCategoryInfo(category);
-                    System.out.println("Không tồn tại danh mục con");
-                    dash();
-                }
-            }
-        }
+//        for (Category parentCategory : parentList) {
+//            showCategoryInfo(parentCategory);
+//            int numOfChildren = 0;
+//            for (Category childrenCategory : childrenList) {
+//                if (childrenCategory.getParentCategoryId() == parentCategory.getCategoryId()) {
+//                    numOfChildren++;
+//                }
+//            }
+//            if (numOfChildren > 0) {
+//                System.out.println("Số danh mục con: " + numOfChildren);
+//            } else {
+//                System.out.println("Không tồn tại danh mục con");
+//            }
+//            dash();
+//            for (Category category : categories) {
+//                if (parentCategory.getCategoryId() == category.getParentCategoryId()) {
+//                    showCategoryInfo(category);
+//                    System.out.println("Không tồn tại danh mục con");
+//                    dash();
+//                }
+//            }
+//        }
+//
+//        //C6:
+//        System.out.println("Câu 6");
+//        Collections.sort(products, comparing(Product::countCharacter).reversed());
+//        for (Category category : categories) {
+//            if (products.get(0).getCategoryId() == category.getCategoryId()) {
+//                System.out.println(products.get(0).getProductName() + " thuộc " +
+//                        category.findCategoryById(categories, category.getParentCategoryId()) + " > " +
+//                        category.findCategoryById(categories, category.getCategoryId()));
+//            }
+//        }
+//
+//        //C7:
+//        for (Product product : products) {
+//            product.setInitOnHand();
+//        }
+//
+//        // C8:
+//        for (Product product : products) {
+//            product.updateProductNameToLowerCase();
+//        }
+//
+//        // C9:
+//        products.sort(comparing(Product::getUnitPrice).reversed());
+//        products.get(0).updateProductStatus();
+//
+//        // C10:
+//        System.out.println("Câu 10: ");
+//        products.sort(comparing(Product::getUnitPrice).reversed());
+//        for (Category category10 : categories) {
+//            if (category10.getParentCategoryId() != null) {
+//                dash();
+//                System.out.println("Category: " + category10.getCategoryName());
+//                int orderNumber = 0;
+//                for (Product product : products) {
+//                    if (product.getCategoryId() == category10.getCategoryId()) {
+//                        product.setOrder(orderNumber);
+//                        orderNumber++;
+//                        product.showInfo();
+//                    }
+//                }
+//            }
+//        }
+//
+//        // C11:
+//        System.out.println("Câu 11");
+//        for (Category categoryChild : childrenList) {
+//            List<Product> productsInCategory = new ArrayList<>();
+//            for (Product product : products) {
+//                if (product.getCategoryId() == categoryChild.getCategoryId()) {
+//                    productsInCategory.add(product);
+//                }
+//            }
+//            productsInCategory.sort(comparing(Product::getUnitPrice));
+//            if (productsInCategory.size() > 0) {
+//                System.out.println("Danh mục con: " + categoryChild.getCategoryName());
+//                System.out.println("Sản phẩm giá cao nhất: " + productsInCategory.get(0).getProductName());
+//                System.out.println("Giá: " + formatCurrency(productsInCategory.get(0).getUnitPrice(), "vn", "VN"));
+//            } else {
+//                System.out.println("Danh mục " + categoryChild.getCategoryName() + " không có sản phẩm ");
+//            }
+//            printSeparatedLine(50, "=");
+//        }
+//
+//        // C12:
+//        System.out.println("Câu 12");
+//        for (Category category12 : childrenList) {
+//            int number = 0;
+//            for (Product product : products) {
+//                if (category12.getCategoryId() == product.getCategoryId()) {
+//                    number++;
+//                }
+//            }
+//            System.out.println("Danh mục sản phẩm: " + category12.getCategoryName());
+//            System.out.println("Số lượng sản phẩm: " + number);
+//        }
+//        System.out.println("Câu 13");
+//        printSeparatedLine(50, "=");
+//        for (Category categoryParent : parentList){
+//            int numOfProduct = 0;
+//            for (Category category : categories){
+//                if (category.getParentCategoryId() == categoryParent.getCategoryId()){
+//                    for (Product product : products){
+//                        if (product.getCategoryId() == category.getCategoryId()){
+//                            numOfProduct++;
+//                        }
+//                    }
+//                }
+//            }
+//            System.out.println("Danh mục sản phẩm: " + categoryParent.addTextToCategoryName());
+//            System.out.println("Số lượng sản phẩm: " + numOfProduct);
+//            printSeparatedLine(50, "=");
+//        }
+//        System.out.println("Câu 14");
 
-        //C6:
-        System.out.println("Câu 6");
-        Collections.sort(products, comparing(Product::countCharacter).reversed());
-        for (Category category : categories) {
-            if (products.get(0).getCategoryId() == category.getCategoryId()) {
-                System.out.println(products.get(0).getProductName() + " thuộc " +
-                        category.findCategoryById(categories, category.getParentCategoryId()) + " > " +
-                        category.findCategoryById(categories, category.getCategoryId()));
-            }
-        }
-
-        //C7:
-        for (Product product : products) {
-            product.setInitOnHand();
-        }
-
-        // C8:
-        for (Product product : products) {
-            product.updateProductNameToLowerCase();
-        }
-
-        // C9:
-        products.sort(comparing(Product::getUnitPrice).reversed());
-        products.get(0).updateProductStatus();
-
-        // C10:
-        System.out.println("Câu 10: ");
-        products.sort(comparing(Product::getUnitPrice).reversed());
-        for (Category category10 : categories) {
-            if (category10.getParentCategoryId() != null) {
-                dash();
-                System.out.println("Category: " + category10.getCategoryName());
-                int orderNumber = 0;
-                for (Product product : products) {
-                    if (product.getCategoryId() == category10.getCategoryId()) {
-                        product.setOrder(orderNumber);
-                        orderNumber++;
-                        product.showInfo();
-                    }
-                }
-            }
-        }
-
-        // C11:
-        System.out.println("Câu 11");
-        for (Category categoryChild : childrenList) {
-            List<Product> productsInCategory = new ArrayList<>();
-            for (Product product : products) {
-                if (product.getCategoryId() == categoryChild.getCategoryId()) {
-                    productsInCategory.add(product);
-                }
-            }
-            productsInCategory.sort(comparing(Product::getUnitPrice));
-            if (productsInCategory.size() > 0) {
-                System.out.println("Danh mục con: " + categoryChild.getCategoryName());
-                System.out.println("Sản phẩm giá cao nhất: " + productsInCategory.get(0).getProductName());
-                System.out.println("Giá: " + formatCurrency(productsInCategory.get(0).getUnitPrice(), "vn", "VN"));
-            } else {
-                System.out.println("Danh mục " + categoryChild.getCategoryName() + " không có sản phẩm ");
-            }
-            printSeparatedLine(50, "=");
-        }
-
-        // C12:
-        System.out.println("Câu 12");
-        for (Category category12 : childrenList) {
-            int number = 0;
-            for (Product product : products) {
-                if (category12.getCategoryId() == product.getCategoryId()) {
-                    number++;
-                }
-            }
-            System.out.println("Danh mục sản phẩm: " + category12.getCategoryName());
-            System.out.println("Số lượng sản phẩm: " + number);
-        }
+//        ===================================
     }
 
 

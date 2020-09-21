@@ -63,15 +63,20 @@ public class Category {
         return categoryName.length();
     }
 
+    public String addTextToCategoryName(){
+        String categoryName = this.getCategoryName();
+        if (categoryName == "Da" || categoryName == "Mặt") {
+            categoryName = "Chăm sóc " + categoryName.toLowerCase();
+
+        }
+        return categoryName;
+    }
+
 
     public String findCategoryById(List<Category> categoryList, UUID categoryId) {
         Category category = categoryList.stream().filter(id -> id.getCategoryId() == categoryId)
                 .findAny().orElse(null);
-        String categoryName = category.getCategoryName();
-        if (categoryName == "Da" || categoryName == "Mặt") {
-            categoryName = " Chăm sóc " + categoryName.toLowerCase();
-
-        }
+        String categoryName = category.addTextToCategoryName();
         return categoryName;
     }
 
