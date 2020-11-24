@@ -1,8 +1,10 @@
 package eShop.Model;
 
+import bank.Account;
 import utils.StringFormat;
 
 import java.util.Calendar;
+import java.util.List;
 import java.util.UUID;
 
 public class Category {
@@ -61,6 +63,23 @@ public class Category {
         return categoryName.length();
     }
 
+    public String addTextToCategoryName(){
+        String categoryName = this.getCategoryName();
+        if (categoryName == "Da" || categoryName == "Mặt") {
+            categoryName = "Chăm sóc " + categoryName.toLowerCase();
+
+        }
+        return categoryName;
+    }
+
+
+    public String findCategoryById(List<Category> categoryList, UUID categoryId) {
+        Category category = categoryList.stream().filter(id -> id.getCategoryId() == categoryId)
+                .findAny().orElse(null);
+        String categoryName = category.addTextToCategoryName();
+        return categoryName;
+    }
+
     public String getCategoryName() {
         return categoryName;
     }
@@ -80,6 +99,8 @@ public class Category {
     public void setOrder(int order) {
         this.order = order;
     }
+
+
 
     //</editor-fold>
 }
