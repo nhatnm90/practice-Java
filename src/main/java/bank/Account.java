@@ -233,7 +233,7 @@ public class Account {
         if (accountId == 0) {
             accountHistory = new AccountHistory(value, AccountHistory.Type.in);
         } else {
-            AccountHistory history = new AccountHistory(value, AccountHistory.Type.transferIn, accountId);
+            accountHistory = new AccountHistory(value, AccountHistory.Type.transferIn, accountId);
         }
         this.currentBalance += value;
         this.histories.add(accountHistory);
