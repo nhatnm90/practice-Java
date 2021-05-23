@@ -9,6 +9,7 @@ import static utils.StringFormat.formatCurrency;
 public class Product {
 
     //<editor-fold desc="Constant">
+    private static final int NUMBER_OF_INIT_ONHAND = 100;
     //</editor-fold>
 
     //<editor-fold desc="Propeties">
@@ -22,10 +23,6 @@ public class Product {
     private int order;
     private long soldItem;
     private double importUnitPrice;
-    //</editor-fold>
-
-    //<editor-fold desc="Getter Setter">
-
     //</editor-fold>
 
     //<editor-fold desc="Constructor">
@@ -115,7 +112,9 @@ public class Product {
     }
 
     public void setInitOnHand(){
-        this.onHand = 100;
+        // this.onHand = 100;
+        this.onHand = NUMBER_OF_INIT_ONHAND;
+        // Nên đưa những thông tin là hằng số lên mục constant để ở 1 chỗ riêng thay vì để trong code như vầy e ha
     }
     public void updateProductStatus(){
         this.isActive = false;
@@ -132,7 +131,12 @@ public class Product {
     }
 
     public void updateProductNameToLowerCase(){
-        this.productName = getProductName().toLowerCase();
+        // this.productName = getProductName().toLowerCase();
+
+        // mình có thể dùng ngay thuộc tính this.productName trong class này luôn thay vì phải xài hàm getter như getProductName() hen
+        // vì mình đang ở trong nội tại của class product mà, nên prop productName dù private vẫn dùng đc bình thường
+        // nên dùng hàm setter khi gọi đến những prop private khi ở ngoài class đó
+        this.productName = this.productName.toLowerCase();
     }
     public void showInfo (){
         System.out.println("Giá: " + formatCurrency(this.unitPrice, "vn", "VN"));

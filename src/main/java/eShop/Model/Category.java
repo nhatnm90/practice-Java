@@ -80,6 +80,14 @@ public class Category {
         return categoryName;
     }
 
+    public String addTextToCategoryName(){
+        String categoryName = this.getCategoryName();
+        if (categoryName == "Da" || categoryName == "Mặt") {
+            categoryName = "Chăm sóc " + categoryName.toLowerCase();
+        }
+        return categoryName;
+    }
+
     public String getCategoryName() {
         return categoryName;
     }

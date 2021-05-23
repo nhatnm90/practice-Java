@@ -31,7 +31,6 @@ public class StringFormat {
         print(50, "-");
     }
 
-
     public static void printSeparatedLine(int length, String separatedChar) {
         print(length, separatedChar);
     }
@@ -54,6 +53,10 @@ public class StringFormat {
 
     private static String format(double amount, Locale local) {
         return NumberFormat.getCurrencyInstance(local).format(amount);
+    }
+
+    public static void printTextWithColor(String text, String color) {
+        System.out.println(color + text + StringColor.ANSI_RESET);
     }
 }
 

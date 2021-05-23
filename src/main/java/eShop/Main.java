@@ -1,6 +1,8 @@
 package eShop;
 
 import eShop.Model.*;
+import utils.StringColor;
+import utils.StringFormat;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -12,6 +14,7 @@ import static utils.StringFormat.printSeparatedLine;
 
 import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 
 public class Main {
@@ -27,7 +30,9 @@ public class Main {
         System.out.println("eShop");
 
 
-        // C1:
+        //
+        System.out.println();
+        StringFormat.printTextWithColor("Câu 1", StringColor.ANSI_RED);
 
         Collections.sort(products, comparing(Product::getUnitPrice).reversed());
         // 1 cách khác viết gọn hơn
@@ -39,28 +44,39 @@ public class Main {
 
 
         // C2:
+        System.out.println();
+        StringFormat.printTextWithColor("Câu 2", StringColor.ANSI_RED);
+
         for (Category category : categories) {
             category.setActive(true);
         }
 
         // C3:
+        System.out.println();
+        StringFormat.printTextWithColor("Câu 3", StringColor.ANSI_RED);
+
         Collections.sort(categories, comparing(Category::countCharacter));
-        // Cách viết này có thể truyền parameter vào trong function nếu mình thực sự cần dùng đến parameter
-        // Cách này kiểu viết lambda hay còn gọi là arrow function
-        // Body của lambda:
-        // Ví du:
-        // object -> object.functionOfClass(parameters)
-        // object: category
-        // functionOfClass: countCharacter() -> the object ONLY call the function of the CLASS that this object was generated from
-        // parameters: category.getCategoryName()
-        // category -> category.countCharacter(category.getCategoryName())
-        // Collections.sort(categories, comparing(category -> category.countCharacter(category.getCategoryName())));
+        /*
+        Cách viết này có thể truyền parameter vào trong function nếu mình thực sự cần dùng đến parameter
+        Cách này kiểu viết lambda hay còn gọi là arrow function
+        Body của lambda:
+        Ví du:
+        object -> object.functionOfClass(parameters)
+        object: category
+        functionOfClass: countCharacter() -> the object ONLY call the function of the CLASS that this object was generated from
+        parameters: category.getCategoryName()
+        category -> category.countCharacter(category.getCategoryName())
+        Collections.sort(categories, comparing(category -> category.countCharacter(category.getCategoryName())));
+        */
         for (int i = 0; i < categories.size(); i++) {
             categories.get(i).setOrder(i);
         }
 
 
         // C4:
+        System.out.println();
+        StringFormat.printTextWithColor("Câu 4", StringColor.ANSI_RED);
+
         List<Category> parentList = new ArrayList<>();
         for (Category category : categories) {
             if (category.getParentCategoryId() == null) {
@@ -70,10 +86,6 @@ public class Main {
         for (Category parentCategory : parentList) {
             boolean isParent = false;
             for (Category category : categories) {
-//                if (parentCategory.getCategoryId() == category.getParentCategoryId()){
-//                    isParent = true;
-//                    break;
-//                }
                 isParent = categories.stream().anyMatch(
                         x -> parentCategory.getCategoryId() == x.getParentCategoryId()
                 );
@@ -84,10 +96,13 @@ public class Main {
             if (isParent == false) {
                 parentCategory.setActive(false);
             }
-//            System.out.println(parentCategory.isActive());
+            // System.out.println(parentCategory.isActive());
         }
 
         // C5:
+        System.out.println();
+        StringFormat.printTextWithColor("Câu 5", StringColor.ANSI_RED);
+
         System.out.println("Câu 5");
         List<Category> childrenList = new ArrayList<>();
         for (Category category : categories) {
@@ -95,130 +110,210 @@ public class Main {
                 childrenList.add(category);
             }
         }
-//        for (Category parentCategory : parentList) {
-//            showCategoryInfo(parentCategory);
-//            int numOfChildren = 0;
-//            for (Category childrenCategory : childrenList) {
-//                if (childrenCategory.getParentCategoryId() == parentCategory.getCategoryId()) {
-//                    numOfChildren++;
-//                }
-//            }
-//            if (numOfChildren > 0) {
-//                System.out.println("Số danh mục con: " + numOfChildren);
-//            } else {
-//                System.out.println("Không tồn tại danh mục con");
-//            }
-//            dash();
-//            for (Category category : categories) {
-//                if (parentCategory.getCategoryId() == category.getParentCategoryId()) {
-//                    showCategoryInfo(category);
-//                    System.out.println("Không tồn tại danh mục con");
-//                    dash();
-//                }
-//            }
-//        }
-//
-//        //C6:
-//        System.out.println("Câu 6");
-//        Collections.sort(products, comparing(Product::countCharacter).reversed());
-//        for (Category category : categories) {
-//            if (products.get(0).getCategoryId() == category.getCategoryId()) {
-//                System.out.println(products.get(0).getProductName() + " thuộc " +
-//                        category.findCategoryById(categories, category.getParentCategoryId()) + " > " +
-//                        category.findCategoryById(categories, category.getCategoryId()));
-//            }
-//        }
-//
-//        //C7:
-//        for (Product product : products) {
-//            product.setInitOnHand();
-//        }
-//
-//        // C8:
-//        for (Product product : products) {
-//            product.updateProductNameToLowerCase();
-//        }
-//
-//        // C9:
-//        products.sort(comparing(Product::getUnitPrice).reversed());
-//        products.get(0).updateProductStatus();
-//
-//        // C10:
-//        System.out.println("Câu 10: ");
-//        products.sort(comparing(Product::getUnitPrice).reversed());
-//        for (Category category10 : categories) {
-//            if (category10.getParentCategoryId() != null) {
-//                dash();
-//                System.out.println("Category: " + category10.getCategoryName());
-//                int orderNumber = 0;
-//                for (Product product : products) {
-//                    if (product.getCategoryId() == category10.getCategoryId()) {
-//                        product.setOrder(orderNumber);
-//                        orderNumber++;
-//                        product.showInfo();
-//                    }
-//                }
-//            }
-//        }
-//
-//        // C11:
-//        System.out.println("Câu 11");
-//        for (Category categoryChild : childrenList) {
-//            List<Product> productsInCategory = new ArrayList<>();
-//            for (Product product : products) {
-//                if (product.getCategoryId() == categoryChild.getCategoryId()) {
-//                    productsInCategory.add(product);
-//                }
-//            }
-//            productsInCategory.sort(comparing(Product::getUnitPrice));
-//            if (productsInCategory.size() > 0) {
-//                System.out.println("Danh mục con: " + categoryChild.getCategoryName());
-//                System.out.println("Sản phẩm giá cao nhất: " + productsInCategory.get(0).getProductName());
-//                System.out.println("Giá: " + formatCurrency(productsInCategory.get(0).getUnitPrice(), "vn", "VN"));
-//            } else {
-//                System.out.println("Danh mục " + categoryChild.getCategoryName() + " không có sản phẩm ");
-//            }
-//            printSeparatedLine(50, "=");
-//        }
-//
-//        // C12:
-//        System.out.println("Câu 12");
-//        for (Category category12 : childrenList) {
-//            int number = 0;
-//            for (Product product : products) {
-//                if (category12.getCategoryId() == product.getCategoryId()) {
-//                    number++;
-//                }
-//            }
-//            System.out.println("Danh mục sản phẩm: " + category12.getCategoryName());
-//            System.out.println("Số lượng sản phẩm: " + number);
-//        }
-//        System.out.println("Câu 13");
-//        printSeparatedLine(50, "=");
-//        for (Category categoryParent : parentList){
-//            int numOfProduct = 0;
-//            for (Category category : categories){
-//                if (category.getParentCategoryId() == categoryParent.getCategoryId()){
-//                    for (Product product : products){
-//                        if (product.getCategoryId() == category.getCategoryId()){
-//                            numOfProduct++;
-//                        }
-//                    }
-//                }
-//            }
-//            System.out.println("Danh mục sản phẩm: " + categoryParent.addTextToCategoryName());
-//            System.out.println("Số lượng sản phẩm: " + numOfProduct);
-//            printSeparatedLine(50, "=");
-//        }
-//        System.out.println("Câu 14");
+        for (Category parentCategory : parentList) {
+            showCategoryInfo(parentCategory);
+            int numOfChildren = 0;
+            for (Category childrenCategory : childrenList) {
+                if (childrenCategory.getParentCategoryId() == parentCategory.getCategoryId()) {
+                    numOfChildren++;
+                }
+            }
+            if (numOfChildren > 0) {
+                System.out.println("Số danh mục con: " + numOfChildren);
+            } else {
+                System.out.println("Không tồn tại danh mục con");
+            }
+            dash();
+            for (Category category : categories) {
+                if (parentCategory.getCategoryId() == category.getParentCategoryId()) {
+                    showCategoryInfo(category);
+                    System.out.println("Không tồn tại danh mục con");
+                    dash();
+                }
+            }
+        }
 
-//        ===================================
+        //C6:
+        System.out.println();
+        StringFormat.printTextWithColor("Câu 6", StringColor.ANSI_RED);
+
+        System.out.println("Câu 6");
+        Collections.sort(products, comparing(Product::countCharacter).reversed());
+        for (Category category : categories) {
+            if (products.get(0).getCategoryId() == category.getCategoryId()) {
+                System.out.println(products.get(0).getProductName() + " thuộc " +
+                        category.findCategoryById(categories, category.getParentCategoryId()) + " > " +
+                        category.findCategoryById(categories, category.getCategoryId()));
+            }
+        }
+
+        // Nếu mình đã tìm đc product có tên dài nhất thì sau đó mình lấy luôn category của product đó xài luôn
+        // mình không cần loop qua cái list category làm gì hết e ha
+        Product productWithLongestName = products.get(0);
+        Category cate = getCategoryById(categories, productWithLongestName.getCategoryId());
+        Category parentCate = getCategoryById(categories, cate.getParentCategoryId());
+        System.out.println(productWithLongestName.getProductName() + " thuộc " +
+                parentCate.getCategoryName() + " > " +
+                cate.getCategoryName());
+
+        //C7:
+        System.out.println();
+        StringFormat.printTextWithColor("Câu 7", StringColor.ANSI_RED);
+
+        for (Product product : products) {
+            product.setInitOnHand();
+        }
+
+        // C8:
+        System.out.println();
+        StringFormat.printTextWithColor("Câu 8", StringColor.ANSI_RED);
+
+        for (Product product : products) {
+            product.updateProductNameToLowerCase();
+        }
+
+        // C9:
+        System.out.println();
+        StringFormat.printTextWithColor("Câu 9", StringColor.ANSI_RED);
+
+        products.sort(comparing(Product::getUnitPrice).reversed());
+        products.get(0).updateProductStatus();
+
+        // yêu cầu của câu 9 là chỉ cập nhật trạng thái isActive của sản phẩm thấp nhất trong MỖI danh mục sản phẩm (category)
+        // theo cách trình bày trên là mình đang chỉ cập nhật giá thấp nhất của hệ thống chứ không phải theo mỗi danh mục sản phẩm à e
+
+        // C10:
+        System.out.println();
+        StringFormat.printTextWithColor("Câu 10", StringColor.ANSI_RED);
+
+        products.sort(comparing(Product::getUnitPrice).reversed());
+        for (Category category10 : categories) {
+            if (category10.getParentCategoryId() != null) {
+                dash();
+                System.out.println("Category: " + category10.getCategoryName());
+                int orderNumber = 0;
+                for (Product product : products) {
+                    if (product.getCategoryId() == category10.getCategoryId()) {
+                        product.setOrder(orderNumber);
+                        orderNumber++;
+                        product.showInfo();
+                    }
+                }
+            }
+        }
+
+        // ở câu này đáp án cuối cùng sẽ đúng à e, nhưng có vẻ cách làm này nó bị cồng kềnh quá á,
+        // vì lúc nào mình cũng phải loop qua tất cả sản phẩm cũng mỗi danh mục để tìm sản phẩm đó hết
+        // thay vì vậy ở mỗi danh mục sản phẩm, mình chỉ nên lấy sản phẩm của danh mục đó ra thôi hen
+
+        System.out.println("Câu 10a: ");
+        // mình chỉ lấy những category nào chứa sản phẩm thôi, category cha thì khỏi cần loop qua hen e
+        // lúc này mình sẽ ko cần tốn 1 cái if để check cái category đó có phải là cate con hay ko
+        for (Category category10a : childrenList) {
+            dash();
+            System.out.println("Category: " + category10a.getCategoryName());
+            // mình chỉ lấy những product thuộc category đang loop qua thôi, lúc này sẽ hạn chế việc lúc nào cũng chạy qua hết danh sách product
+            List<Product> sortedProductsByCate = getListSortByPriceProductByCategory(products, category10a.getCategoryId());
+            // thay vì dùng for kiểu kia thì mình xài for thuần sẽ tận dụng đc biến index hen e
+            for (int i = 0; i < sortedProductsByCate.size(); i++) {
+                sortedProductsByCate.get(i).setOrder(i);
+                sortedProductsByCate.get(i).showInfo();
+            }
+        }
+
+        // C11:
+        System.out.println();
+        StringFormat.printTextWithColor("Câu 11", StringColor.ANSI_RED);
+        for (Category categoryChild : childrenList) {
+            List<Product> productsInCategory = new ArrayList<>();
+            for (Product product : products) {
+                if (product.getCategoryId() == categoryChild.getCategoryId()) {
+                    productsInCategory.add(product);
+                }
+            }
+            productsInCategory.sort(comparing(Product::getUnitPrice));
+            if (productsInCategory.size() > 0) {
+                System.out.println("Danh mục con: " + categoryChild.getCategoryName());
+                System.out.println("Sản phẩm giá cao nhất: " + productsInCategory.get(0).getProductName());
+                System.out.println("Giá: " + formatCurrency(productsInCategory.get(0).getUnitPrice(), "vn", "VN"));
+            } else {
+                System.out.println("Danh mục " + categoryChild.getCategoryName() + " không có sản phẩm ");
+            }
+            printSeparatedLine(50, "=");
+        }
+
+        // câu này mình sửa lại tương tự câu trên hen e, theo cách là cứ tìm danh mục sản phẩm mà chỉ chứa sản phẩm
+        // tìm ta sản phẩm của danh mục đó
+        // sort sản phẩm theo giá
+        // lấy sản phẩm giá cao nhất và in ra thôi hen
+
+        // C12:
+        System.out.println();
+        StringFormat.printTextWithColor("Câu 12", StringColor.ANSI_RED);
+        for (Category category12 : childrenList) {
+            int number = 0;
+            // chỗ này là lúc nào mình cũng phải loop qua hết cái danh sách nè e, hơi bị hao performance ở đây nè
+            for (Product product : products) {
+                if (category12.getCategoryId() == product.getCategoryId()) {
+                    number++;
+                }
+            }
+            System.out.println("Danh mục sản phẩm: " + category12.getCategoryName());
+            System.out.println("Số lượng sản phẩm: " + number);
+        }
+
+        System.out.println("Câu 12a");
+        for (Category category12a : childrenList) {
+            List<Product> listProductByCate = getListProductByCategory(products, category12a.getCategoryId());
+            System.out.println("Danh mục sản phẩm: " + category12a.getCategoryName());
+            System.out.println("Số lượng sản phẩm: " + listProductByCate.size());
+        }
+
+        // C13:
+        System.out.println();
+        StringFormat.printTextWithColor("Câu 13", StringColor.ANSI_RED);
+
+        printSeparatedLine(50, "=");
+        for (Category categoryParent : parentList){
+            int numOfProduct = 0;
+            for (Category category : categories){
+                if (category.getParentCategoryId() == categoryParent.getCategoryId()){
+                    for (Product product : products){
+                        if (product.getCategoryId() == category.getCategoryId()){
+                            numOfProduct++;
+                        }
+                    }
+                }
+            }
+            System.out.println("Danh mục sản phẩm: " + categoryParent.addTextToCategoryName());
+            System.out.println("Số lượng sản phẩm: " + numOfProduct);
+            printSeparatedLine(50, "=");
+        }
+
+        System.out.println();
+        StringFormat.printTextWithColor("Câu 14", StringColor.ANSI_RED);
     }
 
+    private static Category getCategoryById(List<Category> categories, UUID categoryId) {
+        return categories.stream().filter(cate -> cate.getCategoryId() == categoryId)
+                .findAny().orElse(null);
+    }
+
+    private static List<Product> getListProductByCategory(List<Product> products, UUID categoryId) {
+        return products.stream().filter(cate -> cate.getCategoryId() == categoryId)
+                .collect(Collectors.toList());
+    }
+
+    private static List<Product> getListSortByPriceProductByCategory(List<Product> products, UUID categoryId) {
+        List<Product> productsByCate = products.stream().filter(product -> product.getCategoryId().equals(categoryId))
+                .collect(Collectors.toList());
+        productsByCate.sort(comparing(Product::getUnitPrice).reversed());
+        return productsByCate;
+    }
 
     public static void showCategoryInfo(Category category) {
         if (category.getParentCategoryId() == null) {
-            if (category.getCategoryName() == "Da" || category.getCategoryName() == "Mặt") {
+            if (category.getCategoryName().equals("Da") || category.getCategoryName().equals("Mặt")) {
                 System.out.println("Danh mục chính: Chăm sóc " + category.getCategoryName().toLowerCase());
             } else {
                 System.out.println("Danh mục chính: " + category.getCategoryName());
