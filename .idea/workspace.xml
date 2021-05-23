@@ -20,12 +20,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="931e8be6-453d-4ef9-96c5-b3e75cbc0ef4" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/utils/StringColor.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/practice-Java.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/eShop/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/eShop/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/eShop/Model/Category.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/eShop/Model/Category.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/utils/StringFormat.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/utils/StringFormat.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/bank/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/bank/Main.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -180,8 +178,10 @@
       </method>
     </configuration>
     <configuration name="Main_eShop" type="Application" factoryName="Application" temporary="true">
+      <option name="ALTERNATIVE_JRE_PATH" value="$USER_HOME$/.jdks/openjdk-14.0.2" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
       <option name="MAIN_CLASS_NAME" value="eShop.Main" />
-      <module name="practice" />
+      <module name="practice-Java" />
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="eShop.*" />
@@ -239,6 +239,14 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="WindowStateProjectService">
+    <state x="657" y="139" key="#Main_eShop" timestamp="1621747101697">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="657" y="139" key="#Main_eShop/0.0.1920.1040@0.0.1920.1040" timestamp="1621747101697" />
+    <state x="414" y="175" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1621747089892">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="414" y="175" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1621747089892" />
     <state width="454" height="466" key="DebuggerActiveHint" timestamp="1621690445015">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
