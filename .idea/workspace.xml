@@ -20,10 +20,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="931e8be6-453d-4ef9-96c5-b3e75cbc0ef4" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/practice-Java.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/eShop/Model/Category.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/eShop/Model/Category.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -85,10 +82,10 @@
       <recent name="D:\learn\auto\practice\src\main\java\inventory" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.Main_eShop">
-    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+  <component name="RunManager" selected="Application.Main_EShop">
+    <configuration name="Main_Bank" type="Application" factoryName="Application" temporary="true">
       <option name="MAIN_CLASS_NAME" value="bank.Main" />
-      <module name="practice" />
+      <module name="practice-Java" />
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="bank.*" />
@@ -99,12 +96,14 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="MainObject_Advance" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="array.MainObject_Advance" />
-      <module name="practice" />
+    <configuration name="Main_EShop" type="Application" factoryName="Application" temporary="true">
+      <option name="ALTERNATIVE_JRE_PATH" value="$USER_HOME$/.jdks/openjdk-14.0.2" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
+      <option name="MAIN_CLASS_NAME" value="eShop.Main" />
+      <module name="practice-Java" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="array.*" />
+          <option name="PATTERN" value="eShop.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -114,7 +113,7 @@
     </configuration>
     <configuration name="Main_Integer" type="Application" factoryName="Application" temporary="true">
       <option name="MAIN_CLASS_NAME" value="array.MainInteger" />
-      <module name="practice" />
+      <module name="practice-Java" />
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="bank.*" />
@@ -127,7 +126,7 @@
     </configuration>
     <configuration name="Main_Inventory" type="Application" factoryName="Application" temporary="true">
       <option name="MAIN_CLASS_NAME" value="inventory.Main" />
-      <module name="practice" />
+      <module name="practice-Java" />
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="inventory.*" />
@@ -166,7 +165,7 @@
     </configuration>
     <configuration name="Main_String" type="Application" factoryName="Application">
       <option name="MAIN_CLASS_NAME" value="array.MainString" />
-      <module name="practice" />
+      <module name="practice-Java" />
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="bank.*" />
@@ -177,14 +176,12 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="Main_eShop" type="Application" factoryName="Application" temporary="true">
-      <option name="ALTERNATIVE_JRE_PATH" value="$USER_HOME$/.jdks/openjdk-14.0.2" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
-      <option name="MAIN_CLASS_NAME" value="eShop.Main" />
+    <configuration name="Main_Student" type="Application" factoryName="Application" temporary="true">
+      <option name="MAIN_CLASS_NAME" value="student.Main" />
       <module name="practice-Java" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="eShop.*" />
+          <option name="PATTERN" value="student.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -196,19 +193,19 @@
       <item itemvalue="Application.Main_Object" />
       <item itemvalue="Application.Main_Object_Answer" />
       <item itemvalue="Application.Main_String" />
-      <item itemvalue="Application.MainObject_Advance" />
       <item itemvalue="Application.Main_Integer" />
+      <item itemvalue="Application.Main_EShop" />
+      <item itemvalue="Application.Main_Bank" />
+      <item itemvalue="Application.Main_Student" />
       <item itemvalue="Application.Main_Inventory" />
-      <item itemvalue="Application.Main_eShop" />
-      <item itemvalue="Application.Main" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.Main_eShop" />
-        <item itemvalue="Application.Main" />
-        <item itemvalue="Application.Main_Integer" />
+        <item itemvalue="Application.Main_EShop" />
         <item itemvalue="Application.Main_Inventory" />
-        <item itemvalue="Application.MainObject_Advance" />
+        <item itemvalue="Application.Main_Student" />
+        <item itemvalue="Application.Main_Bank" />
+        <item itemvalue="Application.Main_Integer" />
       </list>
     </recent_temporary>
   </component>
@@ -239,38 +236,54 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="WindowStateProjectService">
+    <state x="657" y="139" key="#Main" timestamp="1621748844895">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="657" y="139" key="#Main/0.0.1920.1040@0.0.1920.1040" timestamp="1621748844895" />
+    <state x="657" y="139" key="#MainObject_Advance" timestamp="1621748757602">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="657" y="139" key="#MainObject_Advance/0.0.1920.1040@0.0.1920.1040" timestamp="1621748757602" />
+    <state x="657" y="139" key="#Main_Integer" timestamp="1621748521210">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="657" y="139" key="#Main_Integer/0.0.1920.1040@0.0.1920.1040" timestamp="1621748521210" />
+    <state x="657" y="139" key="#Main_String" timestamp="1621748822352">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="657" y="139" key="#Main_String/0.0.1920.1040@0.0.1920.1040" timestamp="1621748822352" />
     <state x="657" y="139" key="#Main_eShop" timestamp="1621747101697">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="657" y="139" key="#Main_eShop/0.0.1920.1040@0.0.1920.1040" timestamp="1621747101697" />
-    <state x="414" y="175" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1621747089892">
+    <state x="414" y="175" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1621748955940">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="414" y="175" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1621747089892" />
+    <state x="414" y="175" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1621748955940" />
     <state width="454" height="466" key="DebuggerActiveHint" timestamp="1621690445015">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="454" height="466" key="DebuggerActiveHint/0.0.1920.1040@0.0.1920.1040" timestamp="1621690445015" />
-    <state width="1877" height="238" key="GridCell.Tab.0.bottom" timestamp="1621745403094">
+    <state width="1877" height="238" key="GridCell.Tab.0.bottom" timestamp="1621748948178">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1877" height="282" key="GridCell.Tab.0.bottom/-1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1620985348345" />
-    <state width="1877" height="238" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1621745403094" />
-    <state width="1877" height="238" key="GridCell.Tab.0.center" timestamp="1621745403094">
+    <state width="1877" height="238" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1621748948178" />
+    <state width="1877" height="238" key="GridCell.Tab.0.center" timestamp="1621748948178">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1877" height="282" key="GridCell.Tab.0.center/-1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1620985348345" />
-    <state width="1877" height="238" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1621745403094" />
-    <state width="1877" height="238" key="GridCell.Tab.0.left" timestamp="1621745403094">
+    <state width="1877" height="238" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1621748948178" />
+    <state width="1877" height="238" key="GridCell.Tab.0.left" timestamp="1621748948178">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1877" height="282" key="GridCell.Tab.0.left/-1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1620985348345" />
-    <state width="1877" height="238" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1621745403094" />
-    <state width="1877" height="238" key="GridCell.Tab.0.right" timestamp="1621745403094">
+    <state width="1877" height="238" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1621748948178" />
+    <state width="1877" height="238" key="GridCell.Tab.0.right" timestamp="1621748948178">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1877" height="282" key="GridCell.Tab.0.right/-1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1620985348345" />
-    <state width="1877" height="238" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1621745403094" />
+    <state width="1877" height="238" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1621748948178" />
     <state width="1877" height="348" key="GridCell.Tab.1.bottom" timestamp="1621690635193">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
