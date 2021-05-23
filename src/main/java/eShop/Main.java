@@ -1,6 +1,8 @@
 package eShop;
 
 import eShop.Model.*;
+import utils.StringColor;
+import utils.StringFormat;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -28,7 +30,9 @@ public class Main {
         System.out.println("eShop");
 
 
-        // C1:
+        //
+        System.out.println();
+        StringFormat.printTextWithColor("Câu 1", StringColor.ANSI_RED);
 
         Collections.sort(products, comparing(Product::getUnitPrice).reversed());
         // 1 cách khác viết gọn hơn
@@ -40,28 +44,39 @@ public class Main {
 
 
         // C2:
+        System.out.println();
+        StringFormat.printTextWithColor("Câu 2", StringColor.ANSI_RED);
+
         for (Category category : categories) {
             category.setActive(true);
         }
 
         // C3:
+        System.out.println();
+        StringFormat.printTextWithColor("Câu 3", StringColor.ANSI_RED);
+
         Collections.sort(categories, comparing(Category::countCharacter));
-        // Cách viết này có thể truyền parameter vào trong function nếu mình thực sự cần dùng đến parameter
-        // Cách này kiểu viết lambda hay còn gọi là arrow function
-        // Body của lambda:
-        // Ví du:
-        // object -> object.functionOfClass(parameters)
-        // object: category
-        // functionOfClass: countCharacter() -> the object ONLY call the function of the CLASS that this object was generated from
-        // parameters: category.getCategoryName()
-        // category -> category.countCharacter(category.getCategoryName())
-        // Collections.sort(categories, comparing(category -> category.countCharacter(category.getCategoryName())));
+        /*
+        Cách viết này có thể truyền parameter vào trong function nếu mình thực sự cần dùng đến parameter
+        Cách này kiểu viết lambda hay còn gọi là arrow function
+        Body của lambda:
+        Ví du:
+        object -> object.functionOfClass(parameters)
+        object: category
+        functionOfClass: countCharacter() -> the object ONLY call the function of the CLASS that this object was generated from
+        parameters: category.getCategoryName()
+        category -> category.countCharacter(category.getCategoryName())
+        Collections.sort(categories, comparing(category -> category.countCharacter(category.getCategoryName())));
+        */
         for (int i = 0; i < categories.size(); i++) {
             categories.get(i).setOrder(i);
         }
 
 
         // C4:
+        System.out.println();
+        StringFormat.printTextWithColor("Câu 4", StringColor.ANSI_RED);
+
         List<Category> parentList = new ArrayList<>();
         for (Category category : categories) {
             if (category.getParentCategoryId() == null) {
@@ -71,10 +86,6 @@ public class Main {
         for (Category parentCategory : parentList) {
             boolean isParent = false;
             for (Category category : categories) {
-//                if (parentCategory.getCategoryId() == category.getParentCategoryId()){
-//                    isParent = true;
-//                    break;
-//                }
                 isParent = categories.stream().anyMatch(
                         x -> parentCategory.getCategoryId() == x.getParentCategoryId()
                 );
@@ -85,10 +96,13 @@ public class Main {
             if (isParent == false) {
                 parentCategory.setActive(false);
             }
-//            System.out.println(parentCategory.isActive());
+            // System.out.println(parentCategory.isActive());
         }
 
         // C5:
+        System.out.println();
+        StringFormat.printTextWithColor("Câu 5", StringColor.ANSI_RED);
+
         System.out.println("Câu 5");
         List<Category> childrenList = new ArrayList<>();
         for (Category category : categories) {
@@ -120,6 +134,9 @@ public class Main {
         }
 
         //C6:
+        System.out.println();
+        StringFormat.printTextWithColor("Câu 6", StringColor.ANSI_RED);
+
         System.out.println("Câu 6");
         Collections.sort(products, comparing(Product::countCharacter).reversed());
         for (Category category : categories) {
@@ -140,16 +157,25 @@ public class Main {
                 cate.getCategoryName());
 
         //C7:
+        System.out.println();
+        StringFormat.printTextWithColor("Câu 7", StringColor.ANSI_RED);
+
         for (Product product : products) {
             product.setInitOnHand();
         }
 
         // C8:
+        System.out.println();
+        StringFormat.printTextWithColor("Câu 8", StringColor.ANSI_RED);
+
         for (Product product : products) {
             product.updateProductNameToLowerCase();
         }
 
         // C9:
+        System.out.println();
+        StringFormat.printTextWithColor("Câu 9", StringColor.ANSI_RED);
+
         products.sort(comparing(Product::getUnitPrice).reversed());
         products.get(0).updateProductStatus();
 
@@ -157,7 +183,9 @@ public class Main {
         // theo cách trình bày trên là mình đang chỉ cập nhật giá thấp nhất của hệ thống chứ không phải theo mỗi danh mục sản phẩm à e
 
         // C10:
-        System.out.println("Câu 10: ");
+        System.out.println();
+        StringFormat.printTextWithColor("Câu 10", StringColor.ANSI_RED);
+
         products.sort(comparing(Product::getUnitPrice).reversed());
         for (Category category10 : categories) {
             if (category10.getParentCategoryId() != null) {
@@ -194,7 +222,8 @@ public class Main {
         }
 
         // C11:
-        System.out.println("Câu 11");
+        System.out.println();
+        StringFormat.printTextWithColor("Câu 11", StringColor.ANSI_RED);
         for (Category categoryChild : childrenList) {
             List<Product> productsInCategory = new ArrayList<>();
             for (Product product : products) {
@@ -219,7 +248,8 @@ public class Main {
         // lấy sản phẩm giá cao nhất và in ra thôi hen
 
         // C12:
-        System.out.println("Câu 12");
+        System.out.println();
+        StringFormat.printTextWithColor("Câu 12", StringColor.ANSI_RED);
         for (Category category12 : childrenList) {
             int number = 0;
             // chỗ này là lúc nào mình cũng phải loop qua hết cái danh sách nè e, hơi bị hao performance ở đây nè
@@ -238,6 +268,30 @@ public class Main {
             System.out.println("Danh mục sản phẩm: " + category12a.getCategoryName());
             System.out.println("Số lượng sản phẩm: " + listProductByCate.size());
         }
+
+        // C13:
+        System.out.println();
+        StringFormat.printTextWithColor("Câu 13", StringColor.ANSI_RED);
+
+        printSeparatedLine(50, "=");
+        for (Category categoryParent : parentList){
+            int numOfProduct = 0;
+            for (Category category : categories){
+                if (category.getParentCategoryId() == categoryParent.getCategoryId()){
+                    for (Product product : products){
+                        if (product.getCategoryId() == category.getCategoryId()){
+                            numOfProduct++;
+                        }
+                    }
+                }
+            }
+            System.out.println("Danh mục sản phẩm: " + categoryParent.addTextToCategoryName());
+            System.out.println("Số lượng sản phẩm: " + numOfProduct);
+            printSeparatedLine(50, "=");
+        }
+
+        System.out.println();
+        StringFormat.printTextWithColor("Câu 14", StringColor.ANSI_RED);
     }
 
     private static Category getCategoryById(List<Category> categories, UUID categoryId) {
@@ -257,10 +311,9 @@ public class Main {
         return productsByCate;
     }
 
-
     public static void showCategoryInfo(Category category) {
         if (category.getParentCategoryId() == null) {
-            if (category.getCategoryName() == "Da" || category.getCategoryName() == "Mặt") {
+            if (category.getCategoryName().equals("Da") || category.getCategoryName().equals("Mặt")) {
                 System.out.println("Danh mục chính: Chăm sóc " + category.getCategoryName().toLowerCase());
             } else {
                 System.out.println("Danh mục chính: " + category.getCategoryName());
