@@ -118,7 +118,10 @@ public class MainArray {
         }
 
         /*
-        PRACTICE: if you really want to do it
+        PRACTICE:
+        Hope you have time to take care on this practice at weekend...
+        Please take a look on the cheat sheet before doing them... I can not do something difference...
+
         1. Print the array with the ascending sort
         2. Print the array without duplicate element
         3. Get the total of the array of practice 2
