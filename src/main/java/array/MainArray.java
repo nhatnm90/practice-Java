@@ -122,11 +122,50 @@ public class MainArray {
         Hope you have time to take care on this practice at weekend...
         Please take a look on the cheat sheet before doing them... I can not do something difference...
 
-        1. Print the array with the ascending sort
-        2. Print the array without duplicate element
+        Within the array as below:
+        joinedArray = [
+            [2, 4, 0, 6],
+            [2, 1, 0, 1 ],
+            [0, 8, 0, 8, 2, 0, 1, 8]
+        ];
+
+        1. Print the array by the ascending sort
+        Ex:
+            int[] newArray = [9, 1, 7, 2, 3];
+            -> int[] result = [1, 2, 3, 7, 9];
+
+        2. Print the array without duplicate element and by descending sort
+        Ex:
+            int[] newArray = [1, 7, 9, 1, 7, 2, 3, 4, 2];
+            -> int[] result = [9, 7, 4, 3, 2, 1];
+
         3. Get the total of the array of practice 2
-        4. From the list of practice 1, create an array of array with each child array has 2 element with ascending sort
-        Ex: array = [0, 1, 2, 4, 5, 8, 9, 10] -> resultArray = [[0, 1], [2, 4], [5, 8], [9, 10]]
+        Ex:
+            int[] newArray = [1, 2, 3];
+            -> result = 6;
+
+        4. Add any number at the end of the array and print the array out
+        Ex:
+            int[] newArray = [1, 7, 9, 1, 7];
+            -> int[] result =  [1, 7, 9, 1, 7, 246];
+
+        5. Add any number at the beginning of the array and print the array out
+        Ex:
+            int[] newArray = [1, 7, 9, 1, 7];
+            -> int[] result =  [246, 1, 7, 9, 1, 7];
+
+        6. Create a new int[] array with 3 elements that divisible by 13 and add the this array to the middle index of the current array
+
+        Ex:
+            int[] newArray = [13, 39, 52];
+            int[] currentArray = [0, 1, 2, 3, 4, 5, 6, 7];
+            int[] expectedResult = [0, 1, 2, 3, 13, 39, 53, 4, 5, 6, 7];
+
+
+        7. From the list of practice 1, create an array of array with each child array has 2 element with ascending sort
+        Ex:
+            int[] array = [0, 1, 2, 4, 5, 8, 9, 10]
+            -> resultArray = [[0, 1], [2, 4], [5, 8], [9, 10]]
         */
 
     }
