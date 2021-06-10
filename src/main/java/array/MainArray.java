@@ -25,6 +25,7 @@ public class MainArray {
         joinedArray.add(secondArray);
         joinedArray.add(thirdArray);
 
+        // Example - xem phần này trước như là bài học trước khi bắt đầu làm bài tập ha e
         /* START: COMMENT OUT TO DO THE EXERCISES: you can un-comment this quote to run the example code (from START to END)
 
         System.out.println("The number of array: " + joinedArray.size());
@@ -120,6 +121,7 @@ public class MainArray {
 
         *** END: COMMENT OUT TO DO THE EXERCISES */
 
+        // Lưu ý trước khi vào bài
         /*
         * Trước khi học mình cần làm rõ trước khái niệm Array và ArrayList trước ha e, xem mấy cái article này đễ rõ hơn à e:
         * https://viettuts.vn/java-collection/su-khac-nhau-giua-array-voi-arraylist
@@ -130,22 +132,24 @@ public class MainArray {
         * nên mình thống nhất từ giờ về sau cần thao tác gì mình cứ chuyển hết về ArrayList rồi làm sẽ dễ hơn e ha
         */
 
-        // int[] firstArray = new int[]{ 2, 4, 0, 6 };
-        ArrayList<Integer> firstArrayList = new ArrayList<Integer>();
+        // Các mảng cho trước dùng để giải bài tập
+        // Mảng số nguyên chứa 4 phần tử đều là số nguyên
+        // firstArray = [2, 4, 0, 6 ];
+        ArrayList<Integer> firstArrayList = new ArrayList<>();
         firstArrayList.add(2);
         firstArrayList.add(4);
         firstArrayList.add(0);
         firstArrayList.add(6);
 
-        // int[] secondArray = new int[]{ 2, 1, 0, 1 };
-        ArrayList<Integer> secondArrayList = new ArrayList<Integer>();
+        // secondArray = [2, 1, 0, 1 ];
+        ArrayList<Integer> secondArrayList = new ArrayList<>();
         secondArrayList.add(2);
         secondArrayList.add(1);
         secondArrayList.add(0);
         secondArrayList.add(1);
 
-        //int[] thirdArray = new int[]{ 0, 8, 0, 8, 2, 0, 1, 8 };
-        ArrayList<Integer> thirdArrayList = new ArrayList<Integer>();
+        //thirdArrayList =  [0, 8, 0, 8, 2, 0, 1, 8 ];
+        ArrayList<Integer> thirdArrayList = new ArrayList<>();
         thirdArrayList.add(0);
         thirdArrayList.add(8);
         thirdArrayList.add(0);
@@ -155,13 +159,26 @@ public class MainArray {
         thirdArrayList.add(1);
         thirdArrayList.add(8);
 
-        ArrayList<List<Integer>> joinedArrayList = new ArrayList<>();
+        // Mảng chứa các mảng số nguyên
+        // joinedArrayList = [ [2, 4, 0, 6 ],  [2, 1, 0, 1 ], [0, 8, 0, 8, 2, 0, 1, 8 ] ]
+        ArrayList<ArrayList<Integer>> joinedArrayList = new ArrayList<>();
         joinedArrayList.add(firstArrayList);
         joinedArrayList.add(secondArrayList);
         joinedArrayList.add(thirdArrayList);
 
-        // leave the empty type of the array as the simple way to define
-        // List<Integer> flattenedArray = new ArrayList<>(); and List<Integer> flattenedArray = new ArrayList<Integer>(); is the SAME
+        // Có 2 cách tạo 1 đối tượng là mảng kiểu số nguyên là:
+
+        // Cách 1:
+        // ArrayList<Integer> newArrayListName = new ArrayList<Integer>();
+
+        // Cách 2:
+        // ArrayList<Integer> newArrayListName = new ArrayList<>();
+        // Mình có thể để trống phần sau do phần đầu đã định nghĩa kiểu dữ liệu rồi
+
+        // Tạo ra 1 mảng mới chứa tất cả các phần tử đều là số nguyên từ cái mảng bự lúc đầu đã cho (mảng bự lúc đầu là 1 mảng chứa các mảng số nguyên)
+        // joinedArrayList = [ [2, 4, 0, 6 ],  [2, 1, 0, 1 ], [0, 8, 0, 8, 2, 0, 1, 8 ] ]
+        // Sau khi chạy xong câu lệnh bên dưới mảng mới vừa tạo sẽ để thao tác hơn do chỉ còn các số nguyên thôi, mảng chứa màng giờ chỉ còn chứa số nguyên
+        // flattenedArray = [2, 4, 0, 6 , 2, 1, 0, 1, 0, 8, 0, 8, 2, 0, 1, 8]
         ArrayList<Integer> flattenedArray = new ArrayList<>();
         for (List<Integer> arr: joinedArrayList) {
             for (int arrElement : arr) {
@@ -169,7 +186,8 @@ public class MainArray {
             }
         }
 
-        // Due to using the ArrayList instead of looping in the complex array of array, we can use the method addAll which support by arrayList to add the element
+        // Có 1 cách khác để tạo mảng chứa toàn số nguyên đơn giản hơn cách bên trên,
+        // thay vì phải dùng 2 for mình dùng phương thức addAll mà mảng hỗ trợ để tạo ra mảng mới chỉ chứa toàn số nguyên nhanh hơn
         ArrayList<Integer> flattenedArray_1 = new ArrayList<>();
         flattenedArray_1.addAll(firstArrayList);
         flattenedArray_1.addAll(secondArrayList);
